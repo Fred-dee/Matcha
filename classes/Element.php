@@ -140,6 +140,17 @@ class Element {
     public function get_children() {
         return $this->_children;
     }
+    
+    public function first_child()
+    {
+        
+        return (isset($this->_children[0])? $this->_children[0] : -1);
+    }
+    
+    public function child_at($index)
+    {
+        return (isset($this->_children[$index])? $this->_children[$index] : -1);
+    }
 
 }
 

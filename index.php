@@ -4,6 +4,7 @@ if (!isset($_SESSION))
     session_start();
 if (!isset($_SESSION["login"]))
     $_SESSION["login"] = "guest";
+require_once './classes/UserCard.class.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,6 +76,19 @@ if (!isset($_SESSION["login"]))
 
                 </div>
                 <!-- Card -->
+            </div>
+            <div class="card-wrapper">
+                <?php
+                    $card = new UserCard();
+           
+                    $imgattrs = array(
+                        "class" => "d-block w-100 card-picture",
+                        "alt" => ""
+                    );
+                    $card->add_images("./imgs/13524498_1355525024475110_341246408285628536_n.jpg", true, $imgattrs);
+                    $card->assemble();
+                    echo $card;
+                ?>
             </div>
             <?php require_once './includes/footer.inc.php' ?>
         </div>
