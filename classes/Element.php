@@ -9,6 +9,7 @@ class Element {
     protected $_inlineattr = array();
     protected $_isInline;
     protected $_text;
+    protected $_parent = null;
 
     public function __construct($elem_name, $inline) {
         $this->_tagname = $elem_name;
@@ -24,6 +25,7 @@ class Element {
     }
 
     public function prepend_child($child) {
+        $child->_parent = $this;
         array_unshift($this->_children, $child);
     }
 
@@ -134,6 +136,7 @@ class Element {
     }
 
     public function add_child($elem) {
+        $elem->_parent = $this;
         array_push($this->_children, $elem);
     }
 
@@ -150,6 +153,27 @@ class Element {
     public function child_at($index)
     {
         return (isset($this->_children[$index])? $this->_children[$index] : -1);
+    }
+    
+    public function insertBefore($index, $child)
+    {
+        if ($index > -1 && $child instanceof Element)
+        {
+            //$to_insert = array($child);
+            $child->_parent = $this;
+            $original = $this->_children;
+            $this->_children = array_merge(
+                     array_slice($original, 0, $index),
+                     array($child),
+                     array_slice($original, $index));
+            return true;
+        }
+        return false;
+    }
+    
+    public function parentNode()
+    {
+        return (isset($this->_parent)? $this->_parent : null);
     }
 
 }

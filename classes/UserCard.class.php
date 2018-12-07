@@ -40,7 +40,7 @@
             }
             $this->add_child($this->_image_carousel);
             $this->add_child($this->_body_secondary);
-            $this->add_child($this->_body);
+            $this->add_child($this->_body);            
         }
         
         public function add_images($src, $is_path = true, $attributes = array())
@@ -67,7 +67,8 @@
         
         public function add_bioText($text)
         {
-            
+            $this->_body_secondary->add_text($text);
         }
+        
     }
 ?>
