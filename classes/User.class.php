@@ -6,9 +6,12 @@
 		$_id,
 	 	$_username,
 		$_bio,
-		$_age
+		$_age;
+               
 	
-		public function __construct($fields = array()){}
+		public function __construct($fields = array()){
+                    
+                }
 		
 		public function __destruct(){}
 		
