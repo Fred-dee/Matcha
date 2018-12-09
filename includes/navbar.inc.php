@@ -45,6 +45,9 @@
       <div class="md-form my-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
       </div>
+        <div class="md-form my-3">
+            <a href="./private/logout.php"><button class="form-control btn btn-primary">Logout</button></a>
+        </div>
     </form>
   </div>
   <!-- Collapsible content -->

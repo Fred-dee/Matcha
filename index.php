@@ -17,6 +17,9 @@ require_once './config/database.php';
     </head>
     <body>
         <?php require_once './includes/navbar.inc.php' ?>
+        <?php if ($_SESSION["login"] == "guest")
+                include_once './includes/signuplogin.inc.php';
+        ?>
         <div class="container-fluid" id="main">
 
             <div class="card-wrapper">
@@ -25,7 +28,9 @@ require_once './config/database.php';
                 $stmt =$pdo->query("SELECT * FROM `users` WHERE username='Fred_Dee'");
                 $res = $stmt->fetch(PDO::FETCH_ASSOC);
                 $user = new User($res);
-                echo $user;
+                //echo $user;
+                if(isset($_SESSION["user_obj"]))
+                    echo $_SESSION["user_obj"];
                 ?>
             </div>
             <?php require_once './includes/footer.inc.php' ?>
