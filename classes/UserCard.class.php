@@ -49,7 +49,9 @@
             $tmp->add_child(new Element("div", false, array("class" => "col")));
             $tmp->first_child()->add_child(new Element("button", false, array("class" => "btn purple-gradient btn-like")));
             $tmp->child_at(1)->add_child(new Element("button", false, array("class" => "btn blue-gradient btn-reject")));
-            $this->add_child($this->_body);            
+            $this->add_child($this->_body);
+            
+    
         }
         
         public function add_images($src, $is_path = true, $attributes = array())
@@ -67,7 +69,7 @@
             {
                 if (isset($attributes["type"]))
                 {
-                     $img->add_attribute("src", "data:image/".$attributes["type"].";base64," . ($src));
+                     $img_new->add_attribute("src", "data:image/".$attributes["type"].";base64," . ($src));
                 }
                 $img_new->add_attributes($attributes);
             }   

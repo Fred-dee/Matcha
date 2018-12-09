@@ -21,13 +21,81 @@ class Element {
     public function add_class($class) {
         $class = trim($class);
         if (!(array_search($class, $this->_classes))) {
-            array_push($this->_classes, $class);
+            $has_space = strpos($class, ' ');
+            if ($has_space == true)
+            {
+                $new_split = preg_split('/ /', $class);
+                //var_dump($new_split);
+                foreach($new_split as $value)
+                {
+                    
+                    array_push($this->_classes, $value);
+                }
+                    
+            }
+            else
+                array_push($this->_classes, $class);
         }
     }
 
     public function prepend_child($child) {
         $child->_parent = $this;
         array_unshift($this->_children, $child);
+    }
+
+    private function searchTagName($query)
+    {
+        foreach($this->_children as $key => $value)
+        {
+            if ($value->_tagname == $query)
+                return ($value);
+        }
+        return null;
+    }
+    
+    private function searchID($query)
+    {
+      
+        foreach ($this->_children as $key => $value)
+        {
+            
+            foreach($value->_attributes as $att_name => $att_value)
+            {
+                
+                
+                if (isset($att_value["id"]) && $att_value["id"] == $query)
+                    return $value;
+            }
+        }
+        return null;
+    }
+    
+    private function searchClassName($query)
+    {
+        foreach($this->_children as $key => $value)
+        {
+            foreach($value->_classes as $class_index => $class_value)
+            {
+               // echo $class_value."<br/>";
+                if ($class_value == $query)
+                    return ($value);
+            }
+        }
+        return null;
+    }
+    public function querySelector($query) {
+           $query = trim($query);
+           
+           switch($query[0])
+           {
+               case "#":
+                   return $this->searchID( substr($query, 1, strlen($query)));
+               case ".":
+                   return $this->searchClassName(substr($query, 1, strlen($query)));
+                   
+               default :
+                   return $this->searchTagName($query);
+           }
     }
 
     public function __toString() {
@@ -72,13 +140,10 @@ class Element {
 
     public function add_attribute($att_name, $value) {
         if (!array_search(trim($att_name), $this->_attributes)) {
-            if (trim($att_name) == "class")
-            {
-              
+            if (trim($att_name) == "class") {
+
                 $this->add_class($value);
-            }
-            else
-            {
+            } else {
                 array_push($this->_attributes, array(trim($att_name) => trim($value)));
             }
         }
@@ -88,11 +153,10 @@ class Element {
         //var_dump($attrs);
         foreach ($attrs as $key => $value) {
             //echo $key."    ".$value;
-            if (trim($key) == "class")
-            {
+
+            if (trim($key) == "class") {
                 $this->add_class(trim($value));
-            }
-            else
+            } else
                 array_push($this->_attributes, array(trim($key) => trim($value)));
         }
     }
@@ -157,37 +221,30 @@ class Element {
     public function get_children() {
         return $this->_children;
     }
-    
-    public function first_child()
-    {
-        
-        return (isset($this->_children[0])? $this->_children[0] : -1);
+
+    public function first_child() {
+
+        return (isset($this->_children[0]) ? $this->_children[0] : -1);
     }
-    
-    public function child_at($index)
-    {
-        return (isset($this->_children[$index])? $this->_children[$index] : -1);
+
+    public function child_at($index) {
+        return (isset($this->_children[$index]) ? $this->_children[$index] : -1);
     }
-    
-    public function insertBefore($index, $child)
-    {
-        if ($index > -1 && $child instanceof Element)
-        {
+
+    public function insertBefore($index, $child) {
+        if ($index > -1 && $child instanceof Element) {
             //$to_insert = array($child);
             $child->_parent = $this;
             $original = $this->_children;
             $this->_children = array_merge(
-                     array_slice($original, 0, $index),
-                     array($child),
-                     array_slice($original, $index));
+                    array_slice($original, 0, $index), array($child), array_slice($original, $index));
             return true;
         }
         return false;
     }
-    
-    public function parentNode()
-    {
-        return (isset($this->_parent)? $this->_parent : null);
+
+    public function parentNode() {
+        return (isset($this->_parent) ? $this->_parent : null);
     }
 
 }
