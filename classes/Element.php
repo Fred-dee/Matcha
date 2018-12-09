@@ -21,19 +21,15 @@ class Element {
     public function add_class($class) {
         $class = trim($class);
         if (!(array_search($class, $this->_classes))) {
-            $has_space = strpos($class, ' ');
-            if ($has_space == true)
-            {
+
+            if (strpos($class, ' ')) {
                 $new_split = preg_split('/ /', $class);
-                //var_dump($new_split);
-                foreach($new_split as $value)
-                {
-                    
+                
+                foreach ($new_split as $value) {
+
                     array_push($this->_classes, $value);
                 }
-                    
-            }
-            else
+            } else
                 array_push($this->_classes, $class);
         }
     }
@@ -43,59 +39,61 @@ class Element {
         array_unshift($this->_children, $child);
     }
 
-    private function searchTagName($query)
-    {
-        foreach($this->_children as $key => $value)
-        {
+    private function searchTagName($query) {
+        foreach ($this->_children as $key => $value) {
             if ($value->_tagname == $query)
                 return ($value);
         }
         return null;
     }
-    
-    private function searchID($query)
-    {
-      
-        foreach ($this->_children as $key => $value)
-        {
-            
-            foreach($value->_attributes as $att_name => $att_value)
-            {
-                
-                
+
+    private function searchID($query) {
+
+        foreach ($this->_children as $key => $value) {
+
+            foreach ($value->_attributes as $att_name => $att_value) {
+
+
                 if (isset($att_value["id"]) && $att_value["id"] == $query)
                     return $value;
             }
         }
         return null;
     }
-    
-    private function searchClassName($query)
+    private function has_class($query)
     {
-        foreach($this->_children as $key => $value)
+        foreach ($this->_classes as $class_value)
         {
-            foreach($value->_classes as $class_index => $class_value)
-            {
-               // echo $class_value."<br/>";
-                if ($class_value == $query)
-                    return ($value);
-            }
+            if ($class_value == $query)
+                return true;
+        }
+        return false;
+    }
+    private function searchClassName($query) {
+
+        if ($this->has_class($query))
+            return $this;
+        
+        foreach ($this->_children as $key => $value){
+            $ret = $value->querySelector(".".$query);
+          if ($ret != null)
+              return ($ret);
         }
         return null;
     }
+
     public function querySelector($query) {
-           $query = trim($query);
-           
-           switch($query[0])
-           {
-               case "#":
-                   return $this->searchID( substr($query, 1, strlen($query)));
-               case ".":
-                   return $this->searchClassName(substr($query, 1, strlen($query)));
-                   
-               default :
-                   return $this->searchTagName($query);
-           }
+        $query = trim($query);
+
+        switch ($query[0]) {
+            case "#":
+                return $this->searchID(substr($query, 1, strlen($query)));
+            case ".":
+                return $this->searchClassName(substr($query, 1, strlen($query)));
+
+            default :
+                return $this->searchTagName($query);
+        }
     }
 
     public function __toString() {

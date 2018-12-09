@@ -86,8 +86,8 @@ require_once './classes/UserCard.class.php';
                         "alt" => "",
                         "type" => "jpg"
                     );
-                   // $img = base64_encode(file_get_contents("./imgs/13524498_1355525024475110_341246408285628536_n.jpg"));
-                    //$card->add_images($img, false, $imgattrs);
+                    $img = base64_encode(file_get_contents("./imgs/13524498_1355525024475110_341246408285628536_n.jpg"));
+                    $card->add_images($img, false, $imgattrs);
                     $card->assemble();
                     echo $card;
                 ?>
