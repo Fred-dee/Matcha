@@ -6,13 +6,16 @@
                 $_body,
                 $_body_secodary,
                 $_image_carousel,
-                $_images = array();
+                $_images = array(),
+                $_card_title, 
+                $_card_text;
         public function __construct()
         {
-            parent::__construct("div", false);
-            $this->add_class("card");
-            $this->_body = new Element("div", false);
-            $this->_body->add_class("card-body");
+            parent::__construct("div", false, array("class" => "card"));
+            $this->_body = new Element("div", false, array("class" => "card-body"));
+            
+            $this->_card_title = new Element("h4", false, array("class" => "card-title"));
+            $this->_card_text = new Element("p", false, array("class" => "card-text"));
             $this->_body_secondary = new Element("div", false);
             $this->_body_secondary->add_class("card-body card-body-secondary");
 //            <span class="bio-close"><i class="fas fa-angle-up"></i></span>
@@ -40,6 +43,12 @@
             }
             $this->add_child($this->_image_carousel);
             $this->add_child($this->_body_secondary);
+            $this->_body->add_child(new Element("div", false, array("class" => "d-flex justify-content-center")));
+            $tmp = $this->_body->first_child();
+            $tmp->add_child(new Element("div", false, array("class" => "col")));
+            $tmp->add_child(new Element("div", false, array("class" => "col")));
+            $tmp->first_child()->add_child(new Element("button", false, array("class" => "btn purple-gradient btn-like")));
+            $tmp->child_at(1)->add_child(new Element("button", false, array("class" => "btn blue-gradient btn-reject")));
             $this->add_child($this->_body);            
         }
         

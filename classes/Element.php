@@ -11,10 +11,11 @@ class Element {
     protected $_text;
     protected $_parent = null;
 
-    public function __construct($elem_name, $inline) {
+    public function __construct($elem_name, $inline, $array = array()) {
         $this->_tagname = $elem_name;
         $this->_isInline = $inline;
         $this->_text = "";
+        $this->add_attributes($array);
     }
 
     public function add_class($class) {
@@ -71,7 +72,15 @@ class Element {
 
     public function add_attribute($att_name, $value) {
         if (!array_search(trim($att_name), $this->_attributes)) {
-            array_push($this->_attributes, array(trim($att_name) => trim($value)));
+            if (trim($att_name) == "class")
+            {
+              
+                $this->add_class($value);
+            }
+            else
+            {
+                array_push($this->_attributes, array(trim($att_name) => trim($value)));
+            }
         }
     }
 
@@ -79,7 +88,12 @@ class Element {
         //var_dump($attrs);
         foreach ($attrs as $key => $value) {
             //echo $key."    ".$value;
-            array_push($this->_attributes, array(trim($key) => trim($value)));
+            if (trim($key) == "class")
+            {
+                $this->add_class(trim($value));
+            }
+            else
+                array_push($this->_attributes, array(trim($key) => trim($value)));
         }
     }
 

@@ -20,3 +20,13 @@
 {
     cursor: pointer;
 }
+
+.btn-like:before
+{
+    content: "Like";
+}
+
+.btn-reject:before
+{
+    content:"Reject";
+}

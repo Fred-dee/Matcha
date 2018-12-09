@@ -66,8 +66,8 @@ require_once './classes/UserCard.class.php';
                         <!-- Button -->
 
                         <div class="d-flex justify-content-center">
-                            <div class="col "><button class="btn purple-gradient btn-like">Like</button></div>
-                            <div class="col"><button class="btn blue-gradient btn-reject">Reject</button></div>
+                            <div class="col "><button class="btn purple-gradient btn-like"></button></div>
+                            <div class="col"><button class="btn blue-gradient btn-reject"></button></div>
                         </div>
 
 
