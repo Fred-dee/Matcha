@@ -18,16 +18,15 @@ class UserCard extends Element {
 
         $this->_card_title = new Element("h4", false, array("class" => "card-title"));
         $this->_card_text = new Element("p", false, array("class" => "card-text"));
-        $this->_body_secondary = new Element("div", false);
-        $this->_body_secondary->add_class("card-body card-body-secondary");
-//            <span class="bio-close"><i class="fas fa-angle-up"></i></span>
-
+        $this->_body_secondary = new Element("div", false, array("class" => "card-body card-body-secondary"));
+        $this->_body->add_child($this->_card_title);
+        $this->_body->add_child($this->_card_text);
         $this->_body_secondary->add_child(new Element("span", false));
         $this->_body_secondary->first_child()->add_child(new Element("i", false));
         $this->_body_secondary->first_child()->add_class("bio-close");
         $this->_body_secondary->first_child()->first_child()->add_class("fas fa-angle-up");
-        $this->_image_carousel = new Element("div", false);
-        $this->_image_carousel->add_class("view overlay");
+        $this->_image_carousel = new Element("div", false, array("class" => "view overlay"));
+
         $this->_image_carousel->add_child(new Element("div", false, array(
             "id" => "user_carousel",
             "class" => "carousel slide",
@@ -35,24 +34,38 @@ class UserCard extends Element {
         )));
         $this->_image_carousel->first_child()->add_child(new Element("ol", false, array("class" => "carousel-indicators")));
         $this->_image_carousel->first_child()->add_child(
-        new Element("div", false, array("class" => "carousel-inner"))
+                new Element("div", false, array("class" => "carousel-inner"))
         );
         $this->_image_carousel->first_child()->add_child(
-                    new Element("a", false, array(
-                        "class" => "carousel-control-prev",
-                        "href" => "#user_carousel",
-                        "role" => "button",
-                        "data-slide" => "next"
-                        ))
-                );
+                new Element("a", false, array(
+            "class" => "carousel-control-prev",
+            "href" => "#user_carousel",
+            "role" => "button",
+            "data-slide" => "next"
+                ))
+        );
         $this->_image_carousel->first_child()->add_child(
-                    new Element("a", false, array(
-                        "class" => "carousel-control-next",
-                        "href" => "#user_carousel",
-                        "role" => "button",
-                        "data-slide" => "prev"
-                        ))
-                );
+                new Element("a", false, array(
+            "class" => "carousel-control-next",
+            "href" => "#user_carousel",
+            "role" => "button",
+            "data-slide" => "prev"
+                ))
+        );
+        $this->_image_carousel->querySelector('.carousel-control-prev')->add_child
+                (new Element(
+                "span", false, array(
+            "class" => "carousel-control-prev-icon",
+            "aria-hidden" => "true"
+                )
+        ));
+        $this->_image_carousel->querySelector('.carousel-control-next')->add_child
+                (new Element(
+                "span", false, array(
+            "class" => "carousel-control-next-icon",
+            "aria-hidden" => "true"
+                )
+        ));
     }
 
     public function assemble() {
@@ -61,17 +74,24 @@ class UserCard extends Element {
         $this->add_child($this->_body_secondary);
         foreach ($this->_images as $value) {
             $over = new Element("div", false);
+            $li = new Element("li", false, array(
+                "data-target" => "#user_carousel",
+                "data-slide-to" => $img_count
+            ));
             $over->add_class("carousel-item");
-            if ($img_count == 0)
+            if ($img_count == 0) {
+                $li->add_class("active");
                 $over->add_class("active");
+            }
             $over->add_child($value);
+
+            $this->querySelector(".carousel-indicators")->add_child($li);
             $this->querySelector(".carousel-inner")->add_child($over);
-            //$this->_image_carousel->first_child()->querySelector(".carousel-inner")->add_child($over);
             $img_count++;
         }
 
-        $this->_body->add_child(new Element("div", false, array("class" => "d-flex justify-content-center")));
-        $tmp = $this->_body->first_child();
+        $this->_body->add_child(new Element("div", false, array("class" => "d-flex justify-content-center", "id" => "btn_div")));
+        $tmp = $this->_body->querySelector("#btn_div");
         $tmp->add_child(new Element("div", false, array("class" => "col")));
         $tmp->add_child(new Element("div", false, array("class" => "col")));
         $tmp->first_child()->add_child(new Element("button", false, array("class" => "btn purple-gradient btn-like")));
@@ -95,8 +115,16 @@ class UserCard extends Element {
         array_push($this->_images, $img_new);
     }
 
-    public function add_bioText($text) {
+    public function set_bioText($text) {
         $this->_body_secondary->add_text($text);
+    }
+
+    public function set_Title($text) {
+        $this->_card_title->add_text(trim($text));
+    }
+
+    public function set_cardtext($text) {
+        $this->_card_text->add_text(trim($text));
     }
 
 }

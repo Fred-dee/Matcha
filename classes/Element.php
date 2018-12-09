@@ -47,6 +47,15 @@ class Element {
         return null;
     }
 
+    private function has_class($query)
+    {
+        foreach ($this->_classes as $class_value)
+        {
+            if ($class_value == $query)
+                return true;
+        }
+        return false;
+    }
     private function searchID($query) {
 
         foreach ($this->_children as $key => $value) {
@@ -60,15 +69,7 @@ class Element {
         }
         return null;
     }
-    private function has_class($query)
-    {
-        foreach ($this->_classes as $class_value)
-        {
-            if ($class_value == $query)
-                return true;
-        }
-        return false;
-    }
+
     private function searchClassName($query) {
 
         if ($this->has_class($query))
