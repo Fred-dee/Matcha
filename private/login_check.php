@@ -3,18 +3,17 @@
 //$generatedKey = sha1(mt_rand(10000,99999).time().$email);
 if (!isset($_SESSION))
     session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 require_once("../config/database.php");
 require_once("../classes/User.class.php");
 //require_once("../includes/functions.php");
 
 $pdo = DB::getConnection();
-if ($pdo == null)
-{
-	echo json_encode(array("status" => "failure", "message" => "Could not obtain pdo object"));
-    //login_error(-1, "Could not obtain a pdo object");
+if ($pdo == null) {
+    echo json_encode(array("status" => "failure", "message" => "Could not obtain pdo object"));
+    exit();
 }
 if (isset($_POST["submit"])) {
     if ($_POST["submit"] == "Register") {
@@ -24,7 +23,7 @@ if (isset($_POST["submit"])) {
         $password = htmlspecialchars($_POST["s_password"]);
         $cpass = htmlspecialchars($_POST["s_cpassword"]);
         $username = htmlspecialchars($_POST["s_username"]);
-		$dob = htmlspecialchars($_POST["s_dob"]);
+        $dob = htmlspecialchars($_POST["s_dob"]);
         $uppercase = preg_match('@[A-Z]@', $password);
         $lowercase = preg_match('@[a-z]@', $password);
         $number = preg_match('@[0-9]@', $password);
@@ -69,7 +68,7 @@ if (isset($_POST["submit"])) {
                     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
                     $stmt->bindParam(':hash', $hashed, PDO::PARAM_STR);
                     $stmt->bindParam(':veri', $verification_code, PDO::PARAM_STR);
-					$stmt->bindParam(":dob",$dob, PDO::PARAM_STR);
+                    $stmt->bindParam(":dob", $dob, PDO::PARAM_STR);
                     try {
                         $stmt->execute();
                         //$_SESSION["login"] = $username;
@@ -92,14 +91,14 @@ if (isset($_POST["submit"])) {
                         $header .= "Content-Type: text/html; charset=UTF-8\r\n";
                         if ($bool) {
                             echo json_encode(array(
-                                "status" => "succesful",
+                                "status" => "success",
                                 "message" => "Activation Email sent, please check your mail.[Mail may be in spam folder]: "
                             ));
                             exit();
                             //valid_success(1, "Activation Email sent, please check your mail: ", "/index");
                         } else {
                             echo json_encode(array(
-                                "status" => "failure",
+                                "status" => "warining",
                                 "message" => "Account Created, Could not send activation email."
                             ));
                             exit();
@@ -138,15 +137,13 @@ if (isset($_POST["submit"])) {
                     $now = new DateTime();
                     $_SESSION["SESSION_KEY"] = password_hash($_SESSION["login"] . $now->format('Y-m-d-H-i-s'), PASSWORD_DEFAULT);
                     //$_SESSION["user_obj"] = new User($row);
-                    try
-                    {
+                    try {
                         $_SESSION["user_obj"] = new User();
-                    }catch(Exception $e)
-                    {
+                    } catch (Exception $e) {
                         echo json_encode(array(
-                        "status" => "failure",
-                        "message" => $e->getMessage()));
-                    exit();
+                            "status" => "failure",
+                            "message" => $e->getMessage()));
+                        exit();
                     }
                     //header("location: ../index");'
                     echo json_encode(array(

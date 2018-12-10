@@ -18,23 +18,27 @@ $(document).ready(function () {
 
         $.ajax({
             dataType: "json",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
             url: "./private/login_check.php",
             data: FD,
             processData: false,
-            contentType: false,
             type: 'POST',
             success: function (data)
             {
+
                 console.log(data.status + ": " + data.message);
                 //window.alert("well done: "+ JSON.parse(data));
             },
-			error: function(XMLHttpRequest, textStatus, errorThrown) { 
-        alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-    } 
+            error: function (XMLHttpRequest, textStatus, errorThrown)
+            {
+
+                alert("Status: " + textStatus);
+                alert("Error: " + errorThrown);
+            }
         });
 
     });
-    
+
     $("#login_submit").on("click", function () {
         //console.log("I've been clicked");
         var inputs = $("#panelLogin").find("input");
@@ -61,6 +65,5 @@ $(document).ready(function () {
             }
         });
     });
-
 });
 

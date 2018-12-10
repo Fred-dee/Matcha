@@ -28,7 +28,9 @@ require_once './config/database.php';
                 $stmt =$pdo->query("SELECT * FROM `users` WHERE username='Fred-Dee'");
                 $res = $stmt->fetch(PDO::FETCH_ASSOC);
                 $user = new User($res);
-                echo $user;
+                //echo $user;
+                $_SESSION["user_obj"] = $user;
+                $_SESSION["user_obj"]->set_bio("Blah Blah Blah");
                 if(isset($_SESSION["user_obj"]))
                     echo $_SESSION["user_obj"];
                 ?>

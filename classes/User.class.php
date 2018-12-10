@@ -17,10 +17,10 @@ class User {
             $_email,
             $_card,
             $_job,
-			$_gender;
+            $_gender;
 
     public function __construct($fields = array()) {
-        var_dump($fields);
+        //var_dump($fields);
         foreach ($fields as $key => $value) {
             switch ($key) {
                 case "username":
@@ -108,6 +108,15 @@ class User {
         return $ret_string;
     }
 
+    public function set_bio($text)
+    {
+        $this->_bio = htmlspecialchars($text);
+        $stmt = $this->_pdo->prepare("UPDATE `users` SET bio=:b WHERE id=:uid");
+        $stmt->bindParam(":b", $this->_bio, PDO::PARAM_STR);
+        $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    }
     public function update($fields = array()) {
         
     }
