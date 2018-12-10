@@ -25,10 +25,10 @@ require_once './config/database.php';
             <div class="card-wrapper">
                 <?php
                 $pdo = DB::getConnection();
-                $stmt =$pdo->query("SELECT * FROM `users` WHERE username='Fred_Dee'");
+                $stmt =$pdo->query("SELECT * FROM `users` WHERE username='Fred-Dee'");
                 $res = $stmt->fetch(PDO::FETCH_ASSOC);
                 $user = new User($res);
-                //echo $user;
+                echo $user;
                 if(isset($_SESSION["user_obj"]))
                     echo $_SESSION["user_obj"];
                 ?>

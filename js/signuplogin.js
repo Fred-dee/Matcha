@@ -25,13 +25,14 @@ $(document).ready(function () {
             type: 'POST',
             success: function (data)
             {
-                console.log(data.status);
+                console.log(data.status + ": " + data.message);
                 //window.alert("well done: "+ JSON.parse(data));
-            }
+            },
+			error: function(XMLHttpRequest, textStatus, errorThrown) { 
+        alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+    } 
         });
-        /* for (var value of FD.values()) {
-         console.log(value);
-         }*/
+
     });
     
     $("#login_submit").on("click", function () {

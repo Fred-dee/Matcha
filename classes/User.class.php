@@ -16,10 +16,11 @@ class User {
             $_lname,
             $_email,
             $_card,
-            $_job;
+            $_job,
+			$_gender;
 
     public function __construct($fields = array()) {
-        //var_dump($fields);
+        var_dump($fields);
         foreach ($fields as $key => $value) {
             switch ($key) {
                 case "username":
@@ -46,6 +47,9 @@ class User {
                 case "ocupation":
                     $this->_job = $value;
                     break;
+				case "gender":
+					$this->_gender = $value;
+					break;
             }
         }
         $this->_card = new UserCard();

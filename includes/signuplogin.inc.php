@@ -80,6 +80,13 @@
                                 <input type="email" id="s_email" name="s_email" class="form-control form-control-sm validate" required>
                                 <label data-error="wrong" data-success="right" for="s_email">Your email</label>
                             </div>
+							
+							
+                           <div class="md-form form-sm mb-5">
+                                <i class="fa fa-clock-o prefix"></i>
+                                <input type="date" id="s_dob" name="s_dob" class="form-control form-control-sm validate" required>
+                                <label data-error="wrong" data-success="right" for="s_dob">Your Date of Birth</label>
+                            </div>
 
                             <div class="md-form form-sm mb-5">
                                 <i class="fa fa-lock prefix"></i>

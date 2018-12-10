@@ -7,12 +7,15 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once("../config/database.php");
-//require_once("../classes/User.class.php");
+require_once("../classes/User.class.php");
 //require_once("../includes/functions.php");
 
 $pdo = DB::getConnection();
 if ($pdo == null)
-    login_error(-1, "Could not obtain a pdo object");
+{
+	echo json_encode(array("status" => "failure", "message" => "Could not obtain pdo object"));
+    //login_error(-1, "Could not obtain a pdo object");
+}
 if (isset($_POST["submit"])) {
     if ($_POST["submit"] == "Register") {
         $fname = htmlspecialchars($_POST["s_fname"]);
@@ -21,6 +24,7 @@ if (isset($_POST["submit"])) {
         $password = htmlspecialchars($_POST["s_password"]);
         $cpass = htmlspecialchars($_POST["s_cpassword"]);
         $username = htmlspecialchars($_POST["s_username"]);
+		$dob = htmlspecialchars($_POST["s_dob"]);
         $uppercase = preg_match('@[A-Z]@', $password);
         $lowercase = preg_match('@[a-z]@', $password);
         $number = preg_match('@[0-9]@', $password);
@@ -56,8 +60,8 @@ if (isset($_POST["submit"])) {
                     $len = 10;
                     $strong = 10;
                     $verification_code = openssl_random_pseudo_bytes($len, $strong);
-                    $stmt = $pdo->prepare("INSERT INTO users (`username`, `first_name`, `last_name`, `email`, `hash`, `verification_key`) VALUES
-                        (:uname, :fname, :lname, :email, :hash, :veri)
+                    $stmt = $pdo->prepare("INSERT INTO users (`username`, `first_name`, `last_name`, `email`, `hash`, `verification_key`, `birth_date`) VALUES
+                        (:uname, :fname, :lname, :email, :hash, :veri, :dob)
                         ");
                     $stmt->bindParam(':uname', $username, PDO::PARAM_STR, 15);
                     $stmt->bindParam(':fname', $fname, PDO::PARAM_STR, 25);
@@ -65,6 +69,7 @@ if (isset($_POST["submit"])) {
                     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
                     $stmt->bindParam(':hash', $hashed, PDO::PARAM_STR);
                     $stmt->bindParam(':veri', $verification_code, PDO::PARAM_STR);
+					$stmt->bindParam(":dob",$dob, PDO::PARAM_STR);
                     try {
                         $stmt->execute();
                         //$_SESSION["login"] = $username;
