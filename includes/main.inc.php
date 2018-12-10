@@ -23,3 +23,4 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.15/js/mdb.min.js"></script>
 <script type="text/javascript" src="./js/navigation.js"></script>
 <script type="text/javascript" src="./js/signuplogin.js"></script>
+<script type="text/javascript" src="./js/genAlert.js"></script>

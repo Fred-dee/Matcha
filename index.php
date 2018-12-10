@@ -16,7 +16,7 @@ require_once './config/database.php';
         <script type="text/javascript" src="./js/cards.js"></script>
     </head>
     <body>
-        <?php require_once './includes/navbar.inc.php' ?>
+        <?php// require_once './includes/navbar.inc.php' ?>
         <?php if ($_SESSION["login"] == "guest")
                 include_once './includes/signuplogin.inc.php';
         ?>

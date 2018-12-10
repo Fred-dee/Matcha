@@ -60,7 +60,8 @@ $(document).ready(function () {
             type: 'POST',
             success: function (data)
             {
-                console.log(data.status);
+                $.genAlert(data);
+                console.log(data.status+ " " +data.message);
                 //window.alert("well done: "+ JSON.parse(data));
             }
         });
