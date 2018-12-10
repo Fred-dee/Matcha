@@ -58,13 +58,14 @@ $(document).ready(function () {
             type: 'POST',
             success: function (data)
             {
+                console.log(data);
                 $.genAlert(data);
                 console.log(data.status + " " + data.message);
                 //window.alert("well done: "+ JSON.parse(data));
             },
             error: function (XMLHttpRequest, textStatus, errorThrown)
             {
-
+                
                 alert("Status: " + textStatus);
                 alert("Error: " + errorThrown);
             }

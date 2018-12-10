@@ -17,27 +17,29 @@ require_once './config/database.php';
     </head>
     <body>
         <?php require_once './includes/navbar.inc.php' ?>
-        <?php if ($_SESSION["login"] == "guest")
-                include_once './includes/signuplogin.inc.php';
+        <?php
+        if ($_SESSION["login"] == "guest")
+            include_once './includes/signuplogin.inc.php';
         ?>
         <div class="container-fluid" id="main">
 
             <div class="card-wrapper">
                 <?php
-                $pdo = DB::getConnection();
-                $stmt =$pdo->query("SELECT * FROM `users` WHERE username='Fred-Dee'");
-                $res = $stmt->fetch(PDO::FETCH_ASSOC);
-                $user = new User($res);
-                //echo $user;
-                $_SESSION["user_obj"] = $user;
-                $_SESSION["user_obj"]->set_bio("Blah Blah Blah");
-                if(isset($_SESSION["user_obj"]))
-                {
+                /* $pdo = DB::getConnection();
+                  $stmt =$pdo->query("SELECT * FROM `users` WHERE username='Fred-Dee'");
+                  $res = $stmt->fetch(PDO::FETCH_ASSOC);
+                  $user = new User($res);
+                  //echo $user;
+                  $_SESSION["user_obj"] = $user;
+                  $_SESSION["user_obj"]->set_bio("Blah Blah Blah"); */
+                if (isset($_SESSION["user_obj"])) {
                     $_SESSION["user_obj"]->display_publicCard();
+                } else {
+                    echo "Could not make a user persist in the session";
                 }
                 ?>
             </div>
-            <?php require_once './includes/footer.inc.php' ?>
+<?php require_once './includes/footer.inc.php' ?>
         </div>
 
     </body>

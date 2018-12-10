@@ -53,7 +53,7 @@ class User {
             }
         }
         $this->_card = new UserCard();
-        $this->_pdo = DB::getConnection();
+        //$this->_pdo = DB::getConnection();
     }
 
     private function convertString($date) {
@@ -110,6 +110,7 @@ class User {
 
     public function set_bio($text)
     {
+       $this->_pdo = DB::getConnection(); 
         $this->_bio = htmlspecialchars($text);
         $stmt = $this->_pdo->prepare("UPDATE `users` SET bio=:b WHERE id=:uid");
         $stmt->bindParam(":b", $this->_bio, PDO::PARAM_STR);
@@ -127,6 +128,11 @@ class User {
             $this->_card = new UserCard();
             echo $this->__toString();
         }
+    }
+    
+    public function get_firstName()
+    {
+        return $this->_fname;
     }
     public function update($fields = array()) {
         

@@ -1,3 +1,7 @@
+<?php
+if (!isset($_SESSION))
+    session_start();
+?>
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark primary-color">
 
@@ -10,47 +14,11 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="basicExampleNav">
-
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-
-            <!-- Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-
-        </ul>
-        <!-- Links -->
-
-        <form class="form-inline">
-            <div class="md-form my-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            </div>
-            <div class="md-form my-3">
-                <a href="./private/logout.php"><button class="form-control btn btn-primary">Logout</button></a>
-            </div>
-        </form>
+    <div class="md-form my-3" style="position:relative; right: 0">
+        <a href="./private/logout.php"><button class="form-control btn btn-primary">Logout</button></a>
     </div>
-    <!-- Collapsible content -->
+
+<!-- Collapsible content -->
 
 </nav>
 <!--/.Navbar-->
@@ -72,7 +40,7 @@
                     <div class="form-row">
                         <div class="col">
                             <div class="md-form">
-                                <input type="text" id ="p_fname" name="p_fname" class="form-control"/>
+                                <input type="text" id ="p_fname" name="p_fname" class="form-control" value = ""/>
                                 <label for="p_fname">First Name</label>
                             </div>
                         </div>
@@ -106,7 +74,7 @@
                     <div class="form-row">
                         <div class="md-form">
                             <input type="submit" id ="p_submit" name="p_submit" class="form-control btn btn-primary" />
-                            
+
                         </div>
                     </div>
                 </form>
