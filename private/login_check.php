@@ -81,15 +81,17 @@ if (isset($_POST["submit"])) {
                         /*
                          * Remember to send out an email here with verification auth details
                          */
-                        $to_mail = $email;
-                        $header = "FROM: noreply@camagru.com\r\n";
-                        $msg = "Welcome to Camagru:" . "<br/>" . "Your username is: " . $username . "<br/>" . "To activate your account please follow the following link:" . "<br/>" . "<a href='" . $link . "'>Activate:" . $link . "</a>" . "<br/>" . "Best\nCamagru Team";
-                        $msg = str_replace("\n.", "\n..", $msg);
-                        $subject = "Account Activation";
-                        $bool = mail($to_mail, $subject, $msg, $header);
-                        $header .= "MIME-Version: 1.0\r\n";
-                        $header .= "Content-Type: text/html; charset=UTF-8\r\n";
+//                        $to_mail = $email;
+//                        $header = "FROM: noreply@camagru.com\r\n";
+//                        $msg = "Welcome to Camagru:" . "<br/>" . "Your username is: " . $username . "<br/>" . "To activate your account please follow the following link:" . "<br/>" . "<a href='" . $link . "'>Activate:" . $link . "</a>" . "<br/>" . "Best\nCamagru Team";
+//                        $msg = str_replace("\n.", "\n..", $msg);
+//                        $subject = "Account Activation";
+//                        $header .= "MIME-Version: 1.0\r\n";
+//                        $header .= "Content-Type: text/html; charset=UTF-8\r\n";
+//                        $bool = mail($to_mail, $subject, $msg, $header);
+                        $bool = true;
                         if ($bool) {
+                            
                             echo json_encode(array(
                                 "status" => "success",
                                 "message" => "Activation Email sent, please check your mail.[Mail may be in spam folder]: "

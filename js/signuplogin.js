@@ -12,7 +12,7 @@ $(document).ready(function () {
         FD.append("submit", "Register");
         for (var i = 0; i < inputs.length; i++)
         {
-            //console.log(inputs[i].getAttribute("name")+": " +inputs[i].value)
+//console.log(inputs[i].getAttribute("name")+": " +inputs[i].value)
             FD.append(inputs[i].getAttribute("name"), inputs[i].value);
         }
 
@@ -36,18 +36,16 @@ $(document).ready(function () {
                 alert("Error: " + errorThrown);
             }
         });
-
     });
-
     $("#login_submit").on("click", function () {
-        //console.log("I've been clicked");
+//console.log("I've been clicked");
         var inputs = $("#panelLogin").find("input");
         var FD = new FormData();
         FD.append("submit", "Login");
         //console.log(inputs);
         for (var i = 0; i < inputs.length; i++)
         {
-            //console.log(inputs[i].getAttribute("name")+": " +inputs[i].value)
+//console.log(inputs[i].getAttribute("name")+": " +inputs[i].value)
             FD.append(inputs[i].getAttribute("name"), inputs[i].value);
         }
 
@@ -61,8 +59,14 @@ $(document).ready(function () {
             success: function (data)
             {
                 $.genAlert(data);
-                console.log(data.status+ " " +data.message);
+                console.log(data.status + " " + data.message);
                 //window.alert("well done: "+ JSON.parse(data));
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown)
+            {
+
+                alert("Status: " + textStatus);
+                alert("Error: " + errorThrown);
             }
         });
     });

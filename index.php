@@ -16,7 +16,7 @@ require_once './config/database.php';
         <script type="text/javascript" src="./js/cards.js"></script>
     </head>
     <body>
-        <?php// require_once './includes/navbar.inc.php' ?>
+        <?php require_once './includes/navbar.inc.php' ?>
         <?php if ($_SESSION["login"] == "guest")
                 include_once './includes/signuplogin.inc.php';
         ?>
@@ -32,7 +32,9 @@ require_once './config/database.php';
                 $_SESSION["user_obj"] = $user;
                 $_SESSION["user_obj"]->set_bio("Blah Blah Blah");
                 if(isset($_SESSION["user_obj"]))
-                    echo $_SESSION["user_obj"];
+                {
+                    $_SESSION["user_obj"]->display_publicCard();
+                }
                 ?>
             </div>
             <?php require_once './includes/footer.inc.php' ?>

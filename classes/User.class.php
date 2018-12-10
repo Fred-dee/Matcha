@@ -117,6 +117,17 @@ class User {
         $stmt->execute();
         return true;
     }
+    
+    public function display_publicCard($reset = false)
+    {
+        if ($reset == false)
+            echo $this->__toString();
+        else
+        {
+            $this->_card = new UserCard();
+            echo $this->__toString();
+        }
+    }
     public function update($fields = array()) {
         
     }

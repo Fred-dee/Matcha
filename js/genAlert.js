@@ -63,7 +63,6 @@ $(document).ready(function () {
         $("body").append($string);
         $(".modal").modal('toggle');
         $("#modalCookie1").modal('toggle');
-        console.log(data.status);
     };
 });
 
