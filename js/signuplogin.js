@@ -17,7 +17,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            dataType: "json",
+            dataType: "",
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
             url: "./private/login_check.php",
             data: FD,
@@ -25,7 +25,7 @@ $(document).ready(function () {
             type: 'POST',
             success: function (data)
             {
-
+				console.log(data);
                 console.log(data.status + ": " + data.message);
                 //window.alert("well done: "+ JSON.parse(data));
             },
