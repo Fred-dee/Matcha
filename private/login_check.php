@@ -3,9 +3,9 @@
 //$generatedKey = sha1(mt_rand(10000,99999).time().$email);
 if (!isset($_SESSION))
     session_start();
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once("../config/database.php");
 require_once("../classes/User.class.php");
 //require_once("../includes/functions.php");
@@ -17,6 +17,7 @@ if ($pdo == null) {
 }
 if (isset($_POST["submit"])) {
     if ($_POST["submit"] == "Register") {
+		echo json_encode(array("status" => "inprogress", "Message" => "About to get parameters"));
         $fname = htmlspecialchars($_POST["s_fname"]);
         $lname = htmlspecialchars($_POST["s_lname"]);
         $email = htmlspecialchars($_POST["s_email"]);
@@ -24,12 +25,13 @@ if (isset($_POST["submit"])) {
         $cpass = htmlspecialchars($_POST["s_cpassword"]);
         $username = htmlspecialchars($_POST["s_username"]);
         $dob = htmlspecialchars($_POST["s_dob"]);
+		$gender = htmlspecialchars($_POST["s_gender"]);
         $uppercase = preg_match('@[A-Z]@', $password);
         $lowercase = preg_match('@[a-z]@', $password);
         $number = preg_match('@[0-9]@', $password);
 
         $verification_code;
-
+		echo "I am trying to register";
         if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
             //login_error(1, "Password should contain at least one upper case, one lowercase one digit and a special character. Password must be of length 8 and above");
             echo json_encode(array("status" => "failure", "message" => "Password should contain at least one upper case, one lowercase one digit and a special character. Password must be of length 8 and above"));
@@ -59,8 +61,8 @@ if (isset($_POST["submit"])) {
                     $len = 10;
                     $strong = 10;
                     $verification_code = openssl_random_pseudo_bytes($len, $strong);
-                    $stmt = $pdo->prepare("INSERT INTO users (`username`, `first_name`, `last_name`, `email`, `hash`, `verification_key`, `birth_date`) VALUES
-                        (:uname, :fname, :lname, :email, :hash, :veri, :dob)
+                    $stmt = $pdo->prepare("INSERT INTO `users` (`username`, `first_name`, `last_name`, `email`, `hash`, `verification_key`, `birth_date`, `gender`) VALUES
+                        (:uname, :fname, :lname, :email, :hash, :veri, :dob, :gender)
                         ");
                     $stmt->bindParam(':uname', $username, PDO::PARAM_STR, 15);
                     $stmt->bindParam(':fname', $fname, PDO::PARAM_STR, 25);
@@ -69,10 +71,12 @@ if (isset($_POST["submit"])) {
                     $stmt->bindParam(':hash', $hashed, PDO::PARAM_STR);
                     $stmt->bindParam(':veri', $verification_code, PDO::PARAM_STR);
                     $stmt->bindParam(":dob", $dob, PDO::PARAM_STR);
+					$stmt->bindParam(":gender", $gender, PDO::PARAM_STR);
                     try {
                         $stmt->execute();
-                        //$_SESSION["login"] = $username;
-                        $stmt = $pdo->prepare("SELECT id FROM users WHERE username=:uname");
+						echo "executed";
+                        $_SESSION["login"] = $username;
+                        $stmt = $pdo->prepare("SELECT * FROM users WHERE username=:uname");
                         $stmt->bindParam(':uname', $username, PDO::PARAM_STR, 15);
                         $stmt->execute();
                         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -91,7 +95,7 @@ if (isset($_POST["submit"])) {
 //                        $bool = mail($to_mail, $subject, $msg, $header);
                         $bool = true;
                         if ($bool) {
-                            
+                            $_SESSION["user_obj"] = new User($row);
                             echo json_encode(array(
                                 "status" => "success",
                                 "message" => "Activation Email sent, please check your mail.[Mail may be in spam folder]: "
@@ -106,9 +110,6 @@ if (isset($_POST["submit"])) {
                             exit();
                             //general_error(-1, "Account Created, Could not send activation email.", "/index");
                         }
-
-
-                        exit();
                     } catch (PDOException $e) {
                         echo json_encode(array(
                             "status" => "failure",
@@ -135,7 +136,8 @@ if (isset($_POST["submit"])) {
                     //if ($row["verified"] == 0)
                     //   login_error(0, "Please follow the link in your mail to verify your account [Mail might be in spam folder]");
                     $_SESSION["login"] = $username;
-                    $_SESSION["user_id"] = (int) $row["id"];
+                    //$_SESSION["user_id"] = (int) $row["id"];
+					$_SESSION["user_obj"] = new User($row);
                     $now = new DateTime();
                     $_SESSION["SESSION_KEY"] = password_hash($_SESSION["login"] . $now->format('Y-m-d-H-i-s'), PASSWORD_DEFAULT);
                     //$_SESSION["user_obj"] = new User($row);

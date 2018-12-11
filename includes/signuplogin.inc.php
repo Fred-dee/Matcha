@@ -87,7 +87,16 @@
                                 <input type="date" id="s_dob" name="s_dob" class="form-control form-control-sm validate" required>
                                 <label data-error="wrong" data-success="right" for="s_dob">Your Date of Birth</label>
                             </div>
-
+                          <div class="md-form form-sm mb-5">
+                                <i class="fa fa-intersexprefix"></i>
+                                <select name="s_gender" id ="s_gender" class="browser-default custom-select">
+									 <option value="" disabled selected>Choose your option</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Rather Not Specify">Rather not Specify</option>
+							  	</select>
+                                <!--<label data-error="wrong" data-success="right" for="s_gender">Gender</label> -->
+                            </div>
                             <div class="md-form form-sm mb-5">
                                 <i class="fa fa-lock prefix"></i>
                                 <input type="password" id="s_password" name="s_password" class="form-control form-control-sm validate" required>

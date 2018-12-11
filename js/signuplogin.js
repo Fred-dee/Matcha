@@ -9,16 +9,18 @@ $(document).ready(function () {
     {
         var inputs = $("#panelSignup").find("input");
         var FD = new FormData();
-        FD.append("submit", "Register");
+        
         for (var i = 0; i < inputs.length; i++)
         {
-//console.log(inputs[i].getAttribute("name")+": " +inputs[i].value)
+			console.log(inputs[i].getAttribute("name")+": " +inputs[i].value)
             FD.append(inputs[i].getAttribute("name"), inputs[i].value);
         }
-
+		var $select = $("#panelSignup").find("select");
+		FD.append($select[0].getAttribute("name"), $select[0].value);
+		FD.append("submit", "Register");
         $.ajax({
-            dataType: "",
-            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            dataType: "json",
+            contentType: false,
             url: "./private/login_check.php",
             data: FD,
             processData: false,
