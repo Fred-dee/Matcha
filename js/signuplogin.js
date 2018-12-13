@@ -9,15 +9,15 @@ $(document).ready(function () {
     {
         var inputs = $("#panelSignup").find("input");
         var FD = new FormData();
-        
+
         for (var i = 0; i < inputs.length; i++)
         {
-			console.log(inputs[i].getAttribute("name")+": " +inputs[i].value)
+            console.log(inputs[i].getAttribute("name") + ": " + inputs[i].value)
             FD.append(inputs[i].getAttribute("name"), inputs[i].value);
         }
-		var $select = $("#panelSignup").find("select");
-		FD.append($select[0].getAttribute("name"), $select[0].value);
-		FD.append("submit", "Register");
+        var $select = $("#panelSignup").find("select");
+        FD.append($select[0].getAttribute("name"), $select[0].value);
+        FD.append("submit", "Register");
         $.ajax({
             dataType: "json",
             contentType: false,
@@ -27,7 +27,7 @@ $(document).ready(function () {
             type: 'POST',
             success: function (data)
             {
-				console.log(data);
+                console.log(data);
                 console.log(data.status + ": " + data.message);
                 //window.alert("well done: "+ JSON.parse(data));
             },
@@ -52,7 +52,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            dataType: "",
+            dataType: "json",
             url: "./private/login_check.php",
             data: FD,
             processData: false,
@@ -61,13 +61,13 @@ $(document).ready(function () {
             success: function (data)
             {
                 console.log(data);
-                $.genAlert(data);
+                $.genAlert(data, true);
                 console.log(data.status + " " + data.message);
                 //window.alert("well done: "+ JSON.parse(data));
             },
             error: function (XMLHttpRequest, textStatus, errorThrown)
             {
-                
+
                 alert("Status: " + textStatus);
                 alert("Error: " + errorThrown);
             }

@@ -31,7 +31,17 @@
  */
 $(document).ready(function () {
 
-    $.genAlert = function (data)
+    $.removeAlert = function (reload)
+    {
+        // $(document).remove("#modalCookie1");
+
+        $(this).parents(".modal").remove();
+        if (reload == true)
+        {
+            location.reload();
+        }
+    };
+    $.genAlert = function (data, reload)
     {
         var $class;
         switch (data.status)
@@ -48,21 +58,21 @@ $(document).ready(function () {
             default:
                 $class = "modal-info";
                 break;
-                
+
         }
-        var $string =  "<div class='modal fade top' id='modalCookie1' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'"
+        var $string = "<div class='modal fade top' id='modalCookie1' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'"
                 + "aria-hidden = 'true' data-backdrop = 'false'>"
-                +"<div class = 'modal-dialog modal-frame modal-top modal-notify "+ $class+ "' role = 'document' >"
-                +"<div class = 'modal-content' >"
-                +"<div class = 'modal-body' >"
-                +"<div class = 'row d-flex justify-content-center align-items-center'>"
-                +"<p class = 'pt-3 pr-2' > "+data.message+"</p>"
-                +"<a type = 'button' class = 'btn btn-primary' > Learn more <i class = 'fa fa-book ml-1' > </i></a >"
-                +"<a type = 'button' class = 'btn btn-outline-primary waves-effect' data-dismiss = 'modal' > Ok, thanks </a>"
-                +"</div></div>                </div>                </div>                </div>";
+                + "<div class = 'modal-dialog modal-frame modal-top modal-notify " + $class + "' role = 'document' >"
+                + "<div class = 'modal-content' >"
+                + "<div class = 'modal-body' >"
+                + "<div class = 'row d-flex justify-content-center align-items-center'>"
+                + "<p class = 'pt-3 pr-2' > " + data.message + "</p>"
+                + "<a type = 'button' class = 'btn btn-outline-primary waves-effect remove-alert' data-dismiss='modal'  > Ok, thanks </a>"
+                + "</div></div>                </div>                </div>                </div>";
         $("body").append($string);
         $(".modal").modal('toggle');
         $("#modalCookie1").modal('toggle');
+        $(".remove-alert").on("click", $.removeAlert(reload));
     };
 });
 

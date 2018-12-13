@@ -1,8 +1,8 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"].'/Matcha/init.php';
+
+require_once $_SERVER["DOCUMENT_ROOT"] . '/Matcha/init.php';
 if (!isset($_SESSION))
     session_start();
-
 
 class User {
 
@@ -129,6 +129,23 @@ class User {
 
     public function get_firstName() {
         return $this->_fname;
+    }
+
+    public function get_lastName() {
+        return $this->_lname;
+    }
+
+    public function get_email() {
+        return $this->_email;
+    }
+
+    public function get_bio() {
+        return $this->_bio;
+    }
+    
+    public function get_userName()
+    {
+        return $this->_username;
     }
 
     public function update($fields = array()) {
