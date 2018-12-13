@@ -1,9 +1,8 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-require_once $_SERVER["DOCUMENT_ROOT"] . '/Matcha/classes/UserCard.class.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/Matcha/config/database.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/Matcha/init.php';
+if (!isset($_SESSION))
+    session_start();
+
 
 class User {
 
@@ -47,9 +46,9 @@ class User {
                 case "ocupation":
                     $this->_job = $value;
                     break;
-				case "gender":
-					$this->_gender = $value;
-					break;
+                case "gender":
+                    $this->_gender = $value;
+                    break;
             }
         }
         $this->_card = new UserCard();
@@ -83,6 +82,7 @@ class User {
             "alt" => "./imgs/avatar.png",
             "type" => "jpg"
         );
+        $this->_pdo = DB::getConnection();
         $stmt = $this->_pdo->prepare("Select `src`, `type` FROM `images` WHERE user_id=:id");
         $stmt->bindParam(":id", $this->_id, PDO::PARAM_INT);
         $stmt->execute();
@@ -108,9 +108,8 @@ class User {
         return $ret_string;
     }
 
-    public function set_bio($text)
-    {
-       $this->_pdo = DB::getConnection(); 
+    public function set_bio($text) {
+        $this->_pdo = DB::getConnection();
         $this->_bio = htmlspecialchars($text);
         $stmt = $this->_pdo->prepare("UPDATE `users` SET bio=:b WHERE id=:uid");
         $stmt->bindParam(":b", $this->_bio, PDO::PARAM_STR);
@@ -118,22 +117,20 @@ class User {
         $stmt->execute();
         return true;
     }
-    
-    public function display_publicCard($reset = false)
-    {
+
+    public function display_publicCard($reset = false) {
         if ($reset == false)
             echo $this->__toString();
-        else
-        {
+        else {
             $this->_card = new UserCard();
             echo $this->__toString();
         }
     }
-    
-    public function get_firstName()
-    {
+
+    public function get_firstName() {
         return $this->_fname;
     }
+
     public function update($fields = array()) {
         
     }

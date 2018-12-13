@@ -1,6 +1,8 @@
 <?php
+require_once $_SERVER["DOCUMENT_ROOT"].'/Matcha/init.php';
+if (!isset($_SESSION))
+    session_start();
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/Matcha/classes/Element.php';
 
 class UserCard extends Element {
 

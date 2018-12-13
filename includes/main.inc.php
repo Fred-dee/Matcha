@@ -25,3 +25,4 @@
 <script type="text/javascript" src="./js/signuplogin.js"></script>
 <script type="text/javascript" src="./js/genAlert.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
+

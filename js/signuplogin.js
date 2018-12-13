@@ -52,7 +52,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            dataType: "json",
+            dataType: "",
             url: "./private/login_check.php",
             data: FD,
             processData: false,
