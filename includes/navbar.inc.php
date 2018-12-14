@@ -15,6 +15,10 @@ if (!isset($_SESSION))
     <a class="navbar-brand" href="./private/logout.php" style="position: absolute; right: 0px;">Logout</a>
     <?php
         }
+		else
+		{
+			echo "<a class='navbar-brand reg-launch' href='#' >Sign Up/Register</a>";
+		}
     ?>
 
     <!-- Collapsible content -->

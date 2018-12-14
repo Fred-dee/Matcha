@@ -30,5 +30,9 @@ $(document).ready(function () {
         }
     });
     
-
+	$("#modalLRForm").modal('toggle');
+	$(".reg-launch").on("click",function()
+	{
+		$("#modalLRForm").modal('toggle');
+	});
 });

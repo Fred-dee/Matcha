@@ -31,19 +31,10 @@ if (!isset($_SESSION["login"]))
 
             <div class="card-wrapper">
                 <?php
-                 /*$pdo = DB::getConnection();
-                  $stmt = $pdo->query("SELECT * FROM `users` WHERE username='Fred-Dee'");
-                  $res = $stmt->fetch(PDO::FETCH_ASSOC);
-                  if ($res != NULL) {
-                  $user = new User($res);
-                  echo $user;
-                  $_SESSION["user_obj"] = $user;
-                  $_SESSION["user_obj"]->set_bio("Blah Blah Blah");
-                  } */
                 if (isset($_SESSION["user_obj"])) {
                     echo $_SESSION["user_obj"];
                 } else {
-                    echo "Could not make a user persist in the session";
+                    echo "<img class='img-responsive' src='./imgs/landing_page.png' alt='' />";
                 }
                 ?>
             </div>

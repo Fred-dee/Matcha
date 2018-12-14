@@ -11,7 +11,7 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#paneLogin" role="tab"><i class="fa fa-user mr-1"></i>
+                        <a class="nav-link active" data-toggle="tab" href="#panelLogin" role="tab"><i class="fa fa-user mr-1"></i>
                             Login</a>
                     </li>
                     <li class="nav-item">
@@ -131,8 +131,8 @@
     </div>
 </div>
 <!--Modal: Login / Register Form-->
-
+<!--
 <div class="text-center">
     <a href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm">Launch
         Modal LogIn/Register</a>
-</div>
+</div> -->
