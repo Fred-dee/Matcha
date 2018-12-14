@@ -39,7 +39,21 @@ if (!isset($_SESSION))
         </ul>
         <div class="tab-content" id="profile_tab_content">
             <div class="tab-pane fade show active" id="edit_profile" role="tabpanel" aria-labelledby="edit-tab">
-                <form action="./private/update.php" method="POST" class="text-center">
+				<div class="profile-images-wrapper container-fluid">
+					
+					<div class="row">
+						<div class="col-4"><img class="img-fluid rounded" alt="" src="./imgs/Fred_Profile_1.jpg"></div>
+						<div class="col-4"><img class="img-fluid rounded" alt="" src="./imgs/Fred_Profile_1.jpg"></div>
+						<div class="col-4"><img class="img-fluid rounded" alt="" src="./imgs/Fred_Profile_1.jpg"></div>
+					</div>
+					
+					<div class="row">
+						<div class="col-4"><img class="img-fluid rounded" alt="" src="./imgs/Fred_Profile_1.jpg"></div>
+						<div class="col-4"><img class="img-fluid rounded" alt="" src="./imgs/Fred_Profile_1.jpg"></div>
+						<div class="col-4"><img class="img-fluid rounded" alt="" src="./imgs/Fred_Profile_1.jpg"></div>
+					</div>
+				</div>
+                <form action="#" method="POST" class="text-center" id="user_info_form">
                     <div class="form-row">
                         <div class="col">
                             <div class="md-form">
@@ -89,12 +103,11 @@ if (!isset($_SESSION))
                             <label for="p_bio">Biography:</label>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="md-form">
-                            <input type="submit" id ="p_submit" name="p_submit" class="form-control btn btn-primary" />
+                
+                       
+                            <input type="submit" id ="p_submit" name="p_submit" class="form-control btn btn-elegant" />
 
-                        </div>
-                    </div>
+         
                 </form>
             </div>
             <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">

@@ -35,4 +35,30 @@ $(document).ready(function () {
 	{
 		$("#modalLRForm").modal('toggle');
 	});
+	
+	$("#user_info_form").on("submit", function (e){
+		e.preventDefault();
+		var $fd =  new FormData($(this));
+		$.ajax({
+			dataType: "json",
+            url: "./private/update.php",
+            data: $fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data)
+            {
+                console.log(data);
+                $.genAlert(data, false);
+                console.log(data.status + " " + data.message);
+                //window.alert("well done: "+ JSON.parse(data));
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown)
+            {
+
+                alert("Status: " + textStatus);
+                alert("Error: " + errorThrown);
+            }
+			});
+	});
 });

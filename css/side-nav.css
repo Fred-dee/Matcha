@@ -49,6 +49,20 @@ body
 	overflow-x: hidden;
 }
 
+
+.profile-images-wrapper
+{
+
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link 
+{
+	background-color: transparent;
+}
+.md-form input[type=text] ,input[type=email]
+{
+	color: white;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
