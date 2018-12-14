@@ -11,7 +11,7 @@ if (!isset($_SESSION))
         if ($_SESSION["login"] != "guest")
         {
     ?>
-    <a class="navbar-brand" href="#" onclick="openNav()">Profile</a>
+    <a class="navbar-brand sidenav-open" href="#">Profile</a>
     <a class="navbar-brand" href="./private/logout.php" style="position: absolute; right: 0px;">Logout</a>
     <?php
         }
@@ -27,7 +27,7 @@ if (!isset($_SESSION))
 <!--/.Navbar-->
 <!-- .sidenav -->
 <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="javascript:void(0)" class="sidenav-close">&times;</a>
     <div class="container">
         <ul class="nav nav-pills " id="sidenav_tabs" role="tablist">
             <li class="nav-item">

@@ -58,6 +58,10 @@ body
 {
 	background-color: transparent;
 }
+#modalLRForm > *
+{
+	color: black;
+}
 .md-form input[type=text] ,input[type=email]
 {
 	color: white;
