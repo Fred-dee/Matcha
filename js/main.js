@@ -29,18 +29,19 @@ $(document).ready(function () {
             });
         }
     });
-    
-	$("#modalLRForm").modal('toggle');
-	$(".reg-launch").on("click",function()
-	{
-		$("#modalLRForm").modal('toggle');
-	});
-	
-	$("#user_info_form").on("submit", function (e){
-		e.preventDefault();
-		var $fd =  new FormData($(this));
-		$.ajax({
-			dataType: "json",
+
+    $("#modalLRForm").modal('toggle');
+    $(".reg-launch").on("click", function ()
+    {
+        $("#modalLRForm").modal('toggle');
+    });
+
+    $("#user_info_form").on("submit", function (e) {
+        e.preventDefault();
+        var forms = document.getElementById("user_info_form");
+        var $fd = new FormData(forms);
+        $.ajax({
+            dataType: "json",
             url: "./private/update.php",
             data: $fd,
             processData: false,
@@ -59,6 +60,6 @@ $(document).ready(function () {
                 alert("Status: " + textStatus);
                 alert("Error: " + errorThrown);
             }
-			});
-	});
+        });
+    });
 });

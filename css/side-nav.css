@@ -62,7 +62,7 @@ body
 {
 	color: black;
 }
-.md-form input[type=text] ,input[type=email]
+.md-form input[type=text] ,input[type=email] :not(.md-form.form-sm .validate)
 {
 	color: white;
 }

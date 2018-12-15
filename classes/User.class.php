@@ -6,8 +6,8 @@ if (!isset($_SESSION))
 
 class User {
 
-    private $_pdo,
-            $_id,
+    private static $_pdo;
+    private $_id,
             $_username,
             $_bio,
             $_age,
@@ -52,7 +52,7 @@ class User {
             }
         }
         $this->_card = new UserCard();
-        //$this->_pdo = DB::getConnection();
+        self::$_pdo = DB::getConnection();
     }
 
     private function convertString($date) {
@@ -82,8 +82,8 @@ class User {
             "alt" => "./imgs/avatar.png",
             "type" => "jpg"
         );
-        $this->_pdo = DB::getConnection();
-        $stmt = $this->_pdo->prepare("Select `src`, `type` FROM `images` WHERE user_id=:id");
+        self::$_pdo = DB::getConnection();
+        $stmt = self::$_pdo->prepare("Select `src`, `type` FROM `images` WHERE user_id=:id");
         $stmt->bindParam(":id", $this->_id, PDO::PARAM_INT);
         $stmt->execute();
         if ($stmt->rowCount() == 0) {
@@ -109,13 +109,100 @@ class User {
     }
 
     public function set_bio($text) {
-        $this->_pdo = DB::getConnection();
-        $this->_bio = htmlspecialchars($text);
-        $stmt = $this->_pdo->prepare("UPDATE `users` SET bio=:b WHERE id=:uid");
-        $stmt->bindParam(":b", $this->_bio, PDO::PARAM_STR);
-        $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
-        $stmt->execute();
-        return true;
+        $text = trim(htmlspecialchars($text));
+        if ($text != $this->_bio) {
+            try {
+                self::$_pdo = DB::getConnection();
+                $this->_bio = htmlspecialchars($text);
+                $stmt = self::$_pdo->prepare("UPDATE `users` SET bio=:b WHERE id=:uid");
+                $stmt->bindParam(":b", $text, PDO::PARAM_STR);
+                $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $this->_bio = $text;
+            } catch (\PDOException $e) {
+                die($e->getMessage());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function set_firstName($text) {
+        $text = trim(htmlspecialchars($text));
+        if ($text != $this->_fname) {
+            try {
+                 self::$_pdo = DB::getConnection();
+
+                $stmt =  self::$_pdo->prepare("UPDATE `users` SET first_name=:fname WHERE id=:uid");
+                $stmt->bindParam(":fname", $text, PDO::PARAM_STR);
+                $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $this->_fname = $text;
+            } catch (\PDOException $e) {
+                die($e->getMessage());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function set_lastName($text) {
+        $text = trim(htmlspecialchars($text));
+        if ($text != $this->_lname) {
+            try {
+                 self::$_pdo = DB::getConnection();
+
+                $stmt =  self::$_pdo->prepare("UPDATE `users` SET last_name=:lname WHERE id=:uid");
+                $stmt->bindParam(":lname", $text, PDO::PARAM_STR);
+                $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $this->_lname = $text;
+            } catch (\PDOException $e) {
+                die($e->getMessage());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function set_email($text) {
+        $text = trim(htmlspecialchars($text));
+        if ($text != $this->_email) {
+            try {
+                 self::$_pdo = DB::getConnection();
+
+                $stmt =  self::$_pdo->prepare("UPDATE `users` SET email=:email WHERE id=:uid");
+                $stmt->bindParam(":email", $text, PDO::PARAM_STR);
+                $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $this->_email = $text;
+            } catch (\PDOException $e) {
+                die($e->getMessage());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function set_username($text) {
+        $text = trim(htmlspecialchars($text));
+        if ($text != $this->_username) {
+            try {
+                 self::$_pdo = DB::getConnection();
+                $stmt =  self::$_pdo->prepare("SELECT * FROM `users` WHERE `username`=:nuname");
+                $stmt->bindParam(":nuname", $text, PDO::PARAM_STR);
+                $stmt->execute();
+                if ($stmt->rowCount() != 0)
+                    return false;
+                $stmt =  self::$_pdo->prepare("UPDATE `users` SET username=:nuname WHERE id=:uid");
+                $stmt->bindParam(":nuname", $text, PDO::PARAM_STR);
+                $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $this->_username = $text;
+            } catch (\PDOException $e) {
+                die($e->getMessage());
+            }
+        }
     }
 
     public function display_publicCard($reset = false) {
@@ -142,14 +229,36 @@ class User {
     public function get_bio() {
         return $this->_bio;
     }
-    
-    public function get_userName()
-    {
+
+    public function get_userName() {
         return $this->_username;
     }
 
-    public function update($fields = array()) {
-        
+    public function update_individual($fields = array()) {
+        if (!empty($fields)) {
+            try {
+
+                foreach ($fields as $key => $value) {
+                    if ($key === "fname" || $key === "first_name") {
+                        $this->set_firstName($value);
+                    }
+                    if ($key === "lname" || $key === "last_name") {
+                        $this->set_lastName($value);
+                    }
+                    if ($key === "bio" || $key === "biography") {
+                        $this->set_bio($value);
+                    }
+                    if ($key == "email")
+                        $this->set_email($value);
+                    if ($key == "username")
+                        $this->set_username($value);
+                }
+                return true;
+            } catch (\PDOException $e) {
+                die($e->getMessage());
+            }
+        }
+        return false;
     }
 
 }
