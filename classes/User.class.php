@@ -83,7 +83,7 @@ class User {
             "type" => "jpg"
         );
         self::$_pdo = DB::getConnection();
-        $stmt = self::$_pdo->prepare("Select `src`, `type` FROM `images` WHERE user_id=:id");
+        $stmt = self::$_pdo->prepare("Select `src`, `type` FROM `images` WHERE user_id=:id ORDER BY `position` ASC");
         $stmt->bindParam(":id", $this->_id, PDO::PARAM_INT);
         $stmt->execute();
         if ($stmt->rowCount() == 0) {
@@ -131,9 +131,9 @@ class User {
         $text = trim(htmlspecialchars($text));
         if ($text != $this->_fname) {
             try {
-                 self::$_pdo = DB::getConnection();
+                self::$_pdo = DB::getConnection();
 
-                $stmt =  self::$_pdo->prepare("UPDATE `users` SET first_name=:fname WHERE id=:uid");
+                $stmt = self::$_pdo->prepare("UPDATE `users` SET first_name=:fname WHERE id=:uid");
                 $stmt->bindParam(":fname", $text, PDO::PARAM_STR);
                 $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
                 $stmt->execute();
@@ -150,9 +150,9 @@ class User {
         $text = trim(htmlspecialchars($text));
         if ($text != $this->_lname) {
             try {
-                 self::$_pdo = DB::getConnection();
+                self::$_pdo = DB::getConnection();
 
-                $stmt =  self::$_pdo->prepare("UPDATE `users` SET last_name=:lname WHERE id=:uid");
+                $stmt = self::$_pdo->prepare("UPDATE `users` SET last_name=:lname WHERE id=:uid");
                 $stmt->bindParam(":lname", $text, PDO::PARAM_STR);
                 $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
                 $stmt->execute();
@@ -169,9 +169,9 @@ class User {
         $text = trim(htmlspecialchars($text));
         if ($text != $this->_email) {
             try {
-                 self::$_pdo = DB::getConnection();
+                self::$_pdo = DB::getConnection();
 
-                $stmt =  self::$_pdo->prepare("UPDATE `users` SET email=:email WHERE id=:uid");
+                $stmt = self::$_pdo->prepare("UPDATE `users` SET email=:email WHERE id=:uid");
                 $stmt->bindParam(":email", $text, PDO::PARAM_STR);
                 $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
                 $stmt->execute();
@@ -188,13 +188,13 @@ class User {
         $text = trim(htmlspecialchars($text));
         if ($text != $this->_username) {
             try {
-                 self::$_pdo = DB::getConnection();
-                $stmt =  self::$_pdo->prepare("SELECT * FROM `users` WHERE `username`=:nuname");
+                self::$_pdo = DB::getConnection();
+                $stmt = self::$_pdo->prepare("SELECT * FROM `users` WHERE `username`=:nuname");
                 $stmt->bindParam(":nuname", $text, PDO::PARAM_STR);
                 $stmt->execute();
                 if ($stmt->rowCount() != 0)
                     return false;
-                $stmt =  self::$_pdo->prepare("UPDATE `users` SET username=:nuname WHERE id=:uid");
+                $stmt = self::$_pdo->prepare("UPDATE `users` SET username=:nuname WHERE id=:uid");
                 $stmt->bindParam(":nuname", $text, PDO::PARAM_STR);
                 $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
                 $stmt->execute();
@@ -259,6 +259,34 @@ class User {
             }
         }
         return false;
+    }
+
+    public function insert_image($img_type, $base64_src, $position) {
+        try {
+            self::$_pdo = DB::getConnection();
+            $stmt = self::$_pdo->prepare("SELECT * FROM `images` WHERE `user_id`=:uid AND `position`=:pos");
+            $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
+            $stmt->bindParam(":pos", $position, PDO::PARAM_INT);
+            $stmt->execute();
+            $sql;
+            if ($stmt->rowCount() == 0)
+            {
+                $sql = "INSERT INTO `images` (`src`, `type`, `user_id`, `position`) VALUES (:src, :type, :uid, :pos)";
+            }
+            else
+            {
+                $sql = "UPDATE `images` SET `type`=:type, `src`=:src WHERE `user_id`=:uid AND `position`=:pos";
+            }
+            $stmt = self::$_pdo->prepare($sql);
+            $stmt->bindParam(":uid", $this->_id, PDO::PARAM_INT);
+            $stmt->bindParam(":pos", $position, PDO::PARAM_INT);
+            $stmt->bindParam(":type", $img_type, PDO::PARAM_STR);
+            $stmt->bindParam(":src", $base64_src, PDO::PARAM_STR);
+            $stmt->execute();
+            return true;
+        } catch (\PDOException $e) {
+            throw new \PDOException($e->getMessage(), (int) $e->getCode());
+        }
     }
 
 }

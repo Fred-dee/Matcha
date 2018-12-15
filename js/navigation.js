@@ -33,10 +33,9 @@ $(document).ready(function () {
         if($(this).data("open") == false)
         {
             $("#user_info_form").trigger("submit");
-            console.log("I was closing");
+           //console.log("I was closing");
         }
-        else
-            console.log("I was opening");
+
     });
 
 
@@ -46,7 +45,7 @@ $(document).ready(function () {
         $("#main").css("marginLeft", "0px");
 
         $("#mySidenav").data("open", false).trigger("openstatechange");
-        //$("#mySidenav").focusout();
+     
     });
 
 

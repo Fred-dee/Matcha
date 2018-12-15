@@ -33,8 +33,6 @@ if (!isset($_SESSION["login"]))
                 <?php
                 if (isset($_SESSION["user_obj"])) {
                     echo $_SESSION["user_obj"];
-                } else {
-                    echo "<img class='img-responsive' src='./imgs/landing_page.png' alt='' />";
                 }
                 ?>
             </div>
