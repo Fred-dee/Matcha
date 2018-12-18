@@ -269,12 +269,9 @@ class User {
             $stmt->bindParam(":pos", $position, PDO::PARAM_INT);
             $stmt->execute();
             $sql;
-            if ($stmt->rowCount() == 0)
-            {
+            if ($stmt->rowCount() == 0) {
                 $sql = "INSERT INTO `images` (`src`, `type`, `user_id`, `position`) VALUES (:src, :type, :uid, :pos)";
-            }
-            else
-            {
+            } else {
                 $sql = "UPDATE `images` SET `type`=:type, `src`=:src WHERE `user_id`=:uid AND `position`=:pos";
             }
             $stmt = self::$_pdo->prepare($sql);
@@ -287,6 +284,20 @@ class User {
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int) $e->getCode());
         }
+    }
+
+    public function display_pictures() {
+        self::$_pdo = DB::getConnection();
+        $stmt = self::$_pdo->prepare("Select `src`, `type` FROM `images` WHERE user_id=:id ORDER BY `position` ASC");
+        $stmt->bindParam(":id", $this->_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $array_srcs = array();
+
+        while (($res = $stmt->fetch(PDO::FETCH_ASSOC))) {
+            array_push($array_srcs, array("src" => $res["src"], "type" => $res["type"]));
+        }
+        $tmp = new UserProGal($array_srcs);
+        echo $tmp;
     }
 
 }

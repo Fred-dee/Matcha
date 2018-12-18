@@ -32,6 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $array_response["status"] = "success";
                 $array_response["message"] = "Image succesfully uploaded";
+                $array_response["img_Src"] = $img_src;
+                $array_response["filetype"] = $imageFileType;
                 echo json_encode($array_response);
                 exit();
             }

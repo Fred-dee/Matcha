@@ -70,9 +70,10 @@ $(document).ready(function () {
                 
                 $fd.append('image', $(this)[0].files[0]);
                 $fd.append("submit", "insert");
+                $fd.append("position", $(this).attr)
                 
                 $.ajax({
-                    dataType: "",
+                    dataType: "json",
                     data: $fd,
                     url: "./private/profile_pictures.php",
                     processData: false,
@@ -80,9 +81,13 @@ $(document).ready(function () {
                     type: 'POST',
                     success: function (data)
                     {
-                        console.log(data);
+                        //console.log(data);
                         if (data.status != "success")
                             $.genAlert(data, false);
+                        else
+                        {
+                            //change the image src to the src given back in the data
+                        }
                         console.log(data.status + " " + data.message);
                         //window.alert("well done: "+ JSON.parse(data));
                     },
