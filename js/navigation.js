@@ -33,6 +33,7 @@ $(document).ready(function () {
         if($(this).data("open") == false)
         {
             $("#user_info_form").trigger("submit");
+            $("#user_settings_form").trigger("submit");
            //console.log("I was closing");
         }
 

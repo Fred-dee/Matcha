@@ -126,32 +126,52 @@ if (!isset($_SESSION))
             </div>
             <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                 <!-- Default checked -->
-                <div class="form-row" style="color:white !important">
-                    <div class="col">
+                <form id="user_settings_form" action="#" method="POST">
+                    <div class="form-row" style="color:white !important">
+                        <div class="col">
 
-                        <label class="bs-switch">
-                            <input type="checkbox" checked name="p_location">
-                            <span class="slider round"></span>
-                        </label>
+                            <label class="bs-switch">
+                                <input type="checkbox" checked name="p_location">
+                                <span class="slider round"></span>
+                            </label>
+
+                        </div>
+                        <div class="col">
+                            <span>Use My location:</span>
+                        </div>
+                    </div>
+                    <div class="form-row" style="color:white !important">
+                        <div class="col">
+
+                            <label class="bs-switch">
+                                <input type="checkbox" checked name="p_filter">
+                                <span class="slider round"></span>
+                            </label>
+
+                        </div>
+                        <div class="col">
+                            <span>Filter Via Tags</span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="p_interestm" name="p_interest">
+                                <label class="custom-control-label" for="p_interestm">Men</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="p_interestf" name="p_interest" checked>
+                                <label class="custom-control-label" for="p_interestf">Women</label>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <span>Interested in </span>
+                        </div>
 
                     </div>
-                    <div class="col">
-                        <span>Use My location:</span>
-                    </div>
-                </div>
-                <div class="form-row" style="color:white !important">
-                    <div class="col">
-
-                        <label class="bs-switch">
-                            <input type="checkbox" checked name="p_filter">
-                            <span class="slider round"></span>
-                        </label>
-
-                    </div>
-                    <div class="col">
-                        <span>Filter Via Tags</span>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

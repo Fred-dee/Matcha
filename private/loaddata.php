@@ -5,7 +5,7 @@ if (!isset($_SESSION))
     session_start();
 
 if ($_SESSION["login"] != "guest") {
-    if (!isset($_SESSION["data_start"])) {
+    if (!isset($_SESSION["data_start"]) || (isset($_POST["reset"]) && $_POST["reset"] == true)) {
         $_SESSION["data_start"] = true;
         $_SESSION["data_offset"] = 0;
     }

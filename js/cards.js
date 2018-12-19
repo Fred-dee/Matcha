@@ -37,7 +37,7 @@ $.likePerson = function ()
                     success: function (data)
                     {
                         $.addToDom(data);
-                        
+
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown)
                     {
@@ -60,6 +60,25 @@ $.rejectPerson = function ()
             1000,
             function () {
                 $(this).toggle("fade");
+                $(this).remove();
+                $.ajax({
+                    url: "./private/loaddata.php?action=reject",
+                    dataType: "",
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function (data)
+                    {
+                        $.addToDom(data);
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown)
+                    {
+
+                        alert("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
             });
 };
 

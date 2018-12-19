@@ -61,17 +61,40 @@ $(document).ready(function () {
             }
         });
     });
+
+    $("#user_settings_form").on("submit", function (e) {
+        e.preventDefault();
+        var $fd = new FormData();
+        $fd.append("reset", true);
+        $.ajax({
+            url: "./private/loaddata.php",
+            data: $fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data)
+            {
+                console.log("I successedddddd");
+                console.log(data);
+            },
+            error: function (data)
+            {
+                console.log("I failed");
+            }
+        });
+    });
+
     $("img").on("click", function () {
         if ($(this).data("for"))
         {
             $("input[name='" + $(this).data("for") + "']").on("change", function ()
             {
                 var $fd = new FormData();
-                
+
                 $fd.append('image', $(this)[0].files[0]);
                 $fd.append("submit", "insert");
                 $fd.append("position", $(this).attr)
-                
+
                 $.ajax({
                     dataType: "json",
                     data: $fd,
