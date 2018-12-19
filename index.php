@@ -31,9 +31,10 @@ if (!isset($_SESSION["login"]))
 
             <div class="card-wrapper align-middle">
                 <?php
-                if (isset($_SESSION["user_obj"])) {
+                /*if (isset($_SESSION["user_obj"])) {
                      $_SESSION["user_obj"]->display_publicCard(true);
-                }
+                } */
+                include './private/loaddata.php';
                 ?>
             </div>
             <?php require_once './includes/footer.inc.php' ?>

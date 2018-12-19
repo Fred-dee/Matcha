@@ -17,7 +17,7 @@ if ($pdo == null) {
 }
 if (isset($_POST["submit"])) {
     if ($_POST["submit"] == "Register") {
-        echo json_encode(array("status" => "inprogress", "Message" => "About to get parameters"));
+        
         $fname = htmlspecialchars($_POST["s_fname"]);
         $lname = htmlspecialchars($_POST["s_lname"]);
         $email = htmlspecialchars($_POST["s_email"]);
@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
         $number = preg_match('@[0-9]@', $password);
 
         $verification_code;
-        echo "I am trying to register";
+        
         if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
             //login_error(1, "Password should contain at least one upper case, one lowercase one digit and a special character. Password must be of length 8 and above");
             echo json_encode(array("status" => "failure", "message" => "Password should contain at least one upper case, one lowercase one digit and a special character. Password must be of length 8 and above"));

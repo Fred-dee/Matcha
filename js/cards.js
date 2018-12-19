@@ -7,6 +7,15 @@ $.toggleBio = function ()
 {
     $(this).parents(".card").children(".card-body-secondary").toggle("slide");
 };
+$.addToDom = function (data)
+{
+    $(".card-wrapper").append(data);
+    $(".card-picture").on("click", $.toggleBio);
+    $(".bio-close").on("click", $.toggleBio);
+
+    $(".btn-like").on("click", $.likePerson);
+    $(".btn-reject").on("click", $.rejectPerson);
+};
 
 $.likePerson = function ()
 {
@@ -18,6 +27,26 @@ $.likePerson = function ()
             1000,
             function () {
                 $(this).toggle("fade");
+                $(this).remove();
+                $.ajax({
+                    url: "./private/loaddata.php?action=like",
+                    dataType: "",
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function (data)
+                    {
+                        $.addToDom(data);
+                        
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown)
+                    {
+
+                        alert("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
+
             });
 };
 
