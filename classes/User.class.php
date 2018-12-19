@@ -55,6 +55,19 @@ class User {
         self::$_pdo = DB::getConnection();
     }
 
+    public function __destruct() {
+        /*unset($this->_id);
+        unset($this->_bio);
+        unset($this->_age);
+        unset($this->_fname);
+        unset($this->_lname);
+        unset($this->_email);
+        unset($this->_card);
+        unset($this->_job);
+        unset($this->_gender);
+       */
+    }
+
     private function convertString($date) {
         // convert date and time to seconds 
         $sec = strtotime($date);
@@ -70,10 +83,6 @@ class User {
         //get age from date or birthdate
         $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md") ? ((date("Y") - $birthDate[2]) - 1) : (date("Y") - $birthDate[2]));
         return ($age);
-    }
-
-    public function __destruct() {
-        
     }
 
     private function populateCard() {

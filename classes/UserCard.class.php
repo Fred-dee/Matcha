@@ -70,6 +70,16 @@ class UserCard extends Element {
         ));
     }
 
+    public function __destruct()
+    {
+     /*   unset($this->_body);
+        unset($this->_body_secondary);
+        unset($this->_image_carousel);
+        unset($this->_images);
+        unset($this->_card_title);
+        unset($this->_card_text);
+        parent::__destruct();*/
+    }
     public function assemble() {
         $img_count = 0;
         $this->add_child($this->_image_carousel);

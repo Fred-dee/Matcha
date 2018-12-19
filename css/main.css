@@ -21,6 +21,12 @@
     cursor: pointer;
 }
 
+.bio-close{
+    position:absolute;
+    left:0;
+    padding-left:7px;
+}
+
 .btn-like:before
 {
     content: "Like";

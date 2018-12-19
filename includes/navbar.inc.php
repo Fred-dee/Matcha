@@ -66,15 +66,15 @@ if (!isset($_SESSION))
                             <input type="file" accept="image/*" style="display:none" name="p_img6"/>
                             <img class="img-fluid rounded" alt="" data-for="p_img6" src="./imgs/Fred_Profile_1.jpg"></div>
                     </div>
-                </div> -->
+                </div> --> 
                 <form action="#" method="POST" class="text-center" id="user_info_form">
                     <div class="form-row">
                         <div class="col">
                             <div class="md-form">
                                 <input type="text" id ="p_fname" name="p_fname" class="form-control" value = "<?php
-                if (isset($_SESSION["user_obj"]))
-                    echo $_SESSION["user_obj"]->get_firstName();
-                ?>"/>
+                                if (isset($_SESSION["user_obj"]))
+                                    echo $_SESSION["user_obj"]->get_firstName();
+                                ?>"/>
                                 <label for="p_fname">First Name</label>
                             </div>
                         </div>
@@ -83,7 +83,7 @@ if (!isset($_SESSION))
                                 <input type="text" id ="p_lname" name="p_lname" class="form-control" value = "<?php
                                 if (isset($_SESSION["user_obj"]))
                                     echo $_SESSION["user_obj"]->get_lastName();
-                ?>"/>
+                                ?>"/>
                                 <label for="p_lname">Last Name</label>
                             </div>
                         </div>
@@ -94,7 +94,7 @@ if (!isset($_SESSION))
                                 <input type="text" id ="p_username" name="p_username" class="form-control" value = "<?php
                                 if (isset($_SESSION["user_obj"]))
                                     echo $_SESSION["user_obj"]->get_userName();
-                ?>"/>
+                                ?>"/>
                                 <label for="p_username">Username</label>
                             </div>
                         </div>
@@ -103,7 +103,7 @@ if (!isset($_SESSION))
                                 <input type="email" id ="p_email" name="p_email" class="form-control" value = "<?php
                                 if (isset($_SESSION["user_obj"]))
                                     echo $_SESSION["user_obj"]->get_email();
-                ?>"/>
+                                ?>"/>
                                 <label for="p_email">Email Address</label>
                             </div>
                         </div>
@@ -113,7 +113,7 @@ if (!isset($_SESSION))
                             <textarea type="text" id ="p_bio" name="p_bio" class="form-control"><?php
                                 if (isset($_SESSION["user_obj"]))
                                     echo $_SESSION["user_obj"]->get_bio();
-                ?></textarea>
+                                ?></textarea>
                             <label for="p_bio">Biography:</label>
                         </div>
                     </div>
@@ -125,7 +125,33 @@ if (!isset($_SESSION))
                 </form>
             </div>
             <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                <!-- Default checked -->
+                <div class="form-row" style="color:white !important">
+                    <div class="col">
 
+                        <label class="bs-switch">
+                            <input type="checkbox" checked name="p_location">
+                            <span class="slider round"></span>
+                        </label>
+
+                    </div>
+                    <div class="col">
+                        <span>Use My location:</span>
+                    </div>
+                </div>
+                <div class="form-row" style="color:white !important">
+                    <div class="col">
+
+                        <label class="bs-switch">
+                            <input type="checkbox" checked name="p_filter">
+                            <span class="slider round"></span>
+                        </label>
+
+                    </div>
+                    <div class="col">
+                        <span>Filter Via Tags</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

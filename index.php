@@ -29,10 +29,10 @@ if (!isset($_SESSION["login"]))
         ?>
         <div class="container-fluid" id="main">
 
-            <div class="card-wrapper">
+            <div class="card-wrapper align-middle">
                 <?php
                 if (isset($_SESSION["user_obj"])) {
-                    echo $_SESSION["user_obj"];
+                     $_SESSION["user_obj"]->display_publicCard(true);
                 }
                 ?>
             </div>

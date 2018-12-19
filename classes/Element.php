@@ -17,6 +17,18 @@ class Element {
         $this->_text = "";
         $this->add_attributes($array);
     }
+    
+    public function __destruct()
+    {
+        unset($this->_tagname);
+        unset($this->_classes);
+        unset($this->_attributes);
+        unset($this->_children);
+        unset($this->_inlineattr);
+        unset($this->_isInline);
+        unset($this->_text);
+        unset($this->_parent);
+    }
 
     public function add_class($class) {
         $class = trim($class);

@@ -44,6 +44,11 @@ class UserProGal extends Element {
             $loop++;
         }
     }
+    public function __destruct()
+    {
+        /*
+        parent::__destruct();*/
+    }
 
 }
 
