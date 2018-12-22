@@ -51,7 +51,7 @@ class User {
                     break;
             }
         }
-        $this->_card = new UserCard();
+        $this->_card = new UserCard($this->_username);
         self::$_pdo = DB::getConnection();
     }
 
@@ -218,7 +218,7 @@ class User {
         if ($reset == false)
             echo $this->__toString();
         else {
-            $this->_card = new UserCard();
+            $this->_card = new UserCard($this->_username);
             echo $this->__toString();
         }
     }

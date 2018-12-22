@@ -36,7 +36,7 @@ class UserProGal extends Element {
                 $src="./imgs/avatar.png";
             }
             $curr->child_at($loop)->add_child(new Element("img", true, array(
-                "class" => "img-fluid rounded",
+                "class" => "img-fluid rounded profile-picture",
                 "alt" => "",
                 "data-for" => "p_img".($i + 1),
                 "src" => $src

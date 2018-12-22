@@ -46,7 +46,7 @@
 
 body
 {
-	overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 
@@ -54,17 +54,22 @@ body
 {
 
 }
+
+.profile-picture:hover
+{
+    cursor:  pointer; 
+}
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link 
 {
-	background-color: transparent;
+    background-color: transparent;
 }
 #modalLRForm > *
 {
-	color: black;
+    color: black;
 }
 .md-form input[type=text] ,input[type=email] :not(.md-form.form-sm .validate)
 {
-	color: white;
+    color: white;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

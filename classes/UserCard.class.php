@@ -14,8 +14,8 @@ class UserCard extends Element {
             $_card_title,
             $_card_text;
 
-    public function __construct() {
-        parent::__construct("div", false, array("class" => "card"));
+    public function __construct($user_name) {
+        parent::__construct("div", false, array("class" => "card", "data-for" => base64_encode($user_name)));
         $this->_body = new Element("div", false, array("class" => "card-body"));
 
         $this->_card_title = new Element("h4", false, array("class" => "card-title"));

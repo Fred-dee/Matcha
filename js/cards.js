@@ -26,11 +26,17 @@ $.likePerson = function ()
             },
             1000,
             function () {
+                var fd = new FormData();
+                fd.append("action", "likeed");
+                fd.append("user", $(this).data("for"));
+                fd.append("data", true);
                 $(this).toggle("fade");
                 $(this).remove();
+
                 $.ajax({
-                    url: "./private/loaddata.php?action=like",
+                    url: "./private/loaddata.php",
                     dataType: "",
+                    data: fd,
                     processData: false,
                     contentType: false,
                     type: 'POST',
@@ -59,11 +65,16 @@ $.rejectPerson = function ()
             },
             1000,
             function () {
+                var fd = new FormData();
+                fd.append("action", "rejected");
+                fd.append("user", $(this).data("for"));
+                fd.append("data", true);
                 $(this).toggle("fade");
                 $(this).remove();
                 $.ajax({
-                    url: "./private/loaddata.php?action=reject",
+                    url: "./private/loaddata.php?",
                     dataType: "",
+                    data: fd,
                     processData: false,
                     contentType: false,
                     type: 'POST',
