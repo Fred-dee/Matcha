@@ -90,11 +90,22 @@ $(document).ready(function () {
             $("input[name='" + $(this).data("for") + "']").on("change", function ()
             {
                 var $fd = new FormData();
+                var reader = new FileReader();
 
                 $fd.append('image', $(this)[0].files[0]);
                 $fd.append("submit", "insert");
-                $fd.append("position", $(this).attr)
-
+                $fd.append("position", $(this).attr("name").match(/[0-9]+/g));
+  
+                var files = this.files;
+                var $img = $("img[data-for='" + $(this).attr("name") + "']");
+                reader.addEventListener("load", function(){
+                    $img.attr("src", reader.result);
+                }, false);
+                if (files[0])
+                {
+                    reader.readAsDataURL(files[0]);
+                }
+                //$("img[data-for='" + $(this).attr("name") + "']").attr("src", $(this)[0].files[0]);
                 $.ajax({
                     dataType: "json",
                     data: $fd,
