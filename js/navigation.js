@@ -30,11 +30,11 @@ $(document).ready(function () {
     });
     /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
     $("#mySidenav").on("openstatechange", function () {
-        if($(this).data("open") == false)
+        if ($(this).data("open") == false)
         {
             $("#user_info_form").trigger("submit");
             $("#user_settings_form").trigger("submit");
-           //console.log("I was closing");
+            //console.log("I was closing");
         }
 
     });
@@ -46,8 +46,23 @@ $(document).ready(function () {
         $("#main").css("marginLeft", "0px");
 
         $("#mySidenav").data("open", false).trigger("openstatechange");
-     
+
     });
 
+    $.showPage = function ($name)
+    {
+        $($name).slideDown("slow");
+    };
+
+    $(".page-toggle").on("click", function (e) {
+        e.preventDefault();
+        var $tohide = "";
+        if ($(this).attr("href") == "#main")
+            $tohide = "#main2";
+        else
+            $tohide = "#main";
+        $($tohide).slideUp("slow", $.showPage($(this).attr("href")));
+
+    });
 
 });

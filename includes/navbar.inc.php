@@ -11,6 +11,10 @@ if (!isset($_SESSION))
     if ($_SESSION["login"] != "guest") {
         ?>
         <a class="navbar-brand sidenav-open" href="#">Profile</a>
+        <div class="nav-center">
+            <a class="navbar-brand page-toggle" href="#main"><i class="fas fa-user"></i></a>
+            <a class="navbar-brand page-toggle" href="#main2"><i class="fas fa-comments"></i></a>
+        </div>
         <a class="navbar-brand" href="./private/logout.php" style="position: absolute; right: 0px;">Logout</a>
         <?php
     } else {
@@ -41,32 +45,7 @@ if (!isset($_SESSION))
                     $_SESSION["user_obj"]->display_pictures();
                 }
                 ?>
-                <!--<div class="profile-images-wrapper container-fluid">
 
-                    <div class="row">
-                        <div class="col-4">
-                            <input type="file" accept="image/*" style="display:none" name="p_img1"/>
-                            <img class="img-fluid rounded" alt="" data-for="p_img1" src="./imgs/Fred_Profile_1.jpg"></div>
-                        <div class="col-4">
-                            <input type="file" accept="image/*" style="display:none" name="p_img2"/>
-                            <img class="img-fluid rounded" alt="" data-for="p_img2" src="./imgs/Fred_Profile_1.jpg"></div>
-                        <div class="col-4">
-                            <input type="file" accept="image/*" style="display:none" name="p_img3"/>
-                            <img class="img-fluid rounded" alt="" data-for="p_img3" src="./imgs/Fred_Profile_1.jpg"></div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4">
-                            <input type="file" accept="image/*" style="display:none" name="p_img4"/>
-                            <img class="img-fluid rounded" alt="" data-for="p_img4" src="./imgs/Fred_Profile_1.jpg"></div>
-                        <div class="col-4">
-                            <input type="file" accept="image/*" style="display:none" name="p_img5"/>
-                            <img class="img-fluid rounded" alt="" data-for="p_img5" src="./imgs/Fred_Profile_1.jpg"></div>
-                        <div class="col-4">
-                            <input type="file" accept="image/*" style="display:none" name="p_img6"/>
-                            <img class="img-fluid rounded" alt="" data-for="p_img6" src="./imgs/Fred_Profile_1.jpg"></div>
-                    </div>
-                </div> --> 
                 <form action="#" method="POST" class="text-center" id="user_info_form">
                     <div class="form-row">
                         <div class="col">

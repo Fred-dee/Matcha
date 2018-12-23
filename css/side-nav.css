@@ -49,7 +49,12 @@ body
     overflow-x: hidden;
 }
 
-
+.nav-center
+{
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
 .profile-images-wrapper
 {
 
