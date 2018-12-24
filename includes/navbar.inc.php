@@ -150,6 +150,22 @@ if (!isset($_SESSION))
                         </div>
 
                     </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="md-form">
+                                <label for="p_agerange">Age</label>
+                                <input type="range" class="custom-range" id="p_agerange">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="md-form">
+                                <label for="p_locationrange">Proximity</label>
+                                <input type="range" class="custom-range" id="p_locationrange">
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

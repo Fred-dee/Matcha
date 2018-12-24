@@ -16,7 +16,7 @@
     display:none;
 }
 
-.bio-close:hover
+.bio-close, .avatar:hover
 {
     cursor: pointer;
 }
