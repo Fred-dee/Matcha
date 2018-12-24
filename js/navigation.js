@@ -24,6 +24,7 @@ $(document).ready(function () {
     {
         $("#mySidenav").width(350);
         $("#main").css("marginLeft", "350px");
+        $("#main2").css("marginLeft", "350px");
         $("#mySidenav").data("open", true).trigger("openstatechange");
         //$("#main").style.overflowX = "none";
 
@@ -44,7 +45,7 @@ $(document).ready(function () {
     $(".sidenav-close").on("click", function () {
         $("#mySidenav").width("0");
         $("#main").css("marginLeft", "0px");
-
+        $("#main2").css("marginLeft", "0px");
         $("#mySidenav").data("open", false).trigger("openstatechange");
 
     });

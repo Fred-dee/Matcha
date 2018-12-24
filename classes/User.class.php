@@ -19,7 +19,7 @@ class User {
             $_gender;
 
     public function __construct($fields = array()) {
-        //var_dump($fields);
+//var_dump($fields);
         foreach ($fields as $key => $value) {
             switch ($key) {
                 case "username":
@@ -56,20 +56,20 @@ class User {
     }
 
     public function __destruct() {
-        /*unset($this->_id);
-        unset($this->_bio);
-        unset($this->_age);
-        unset($this->_fname);
-        unset($this->_lname);
-        unset($this->_email);
-        unset($this->_card);
-        unset($this->_job);
-        unset($this->_gender);
-       */
+        /* unset($this->_id);
+          unset($this->_bio);
+          unset($this->_age);
+          unset($this->_fname);
+          unset($this->_lname);
+          unset($this->_email);
+          unset($this->_card);
+          unset($this->_job);
+          unset($this->_gender);
+         */
     }
 
     private function convertString($date) {
-        // convert date and time to seconds 
+// convert date and time to seconds 
         $sec = strtotime($date);
 
 
@@ -80,12 +80,12 @@ class User {
     private function calculate_age($birthDate) {
         $birthDate = $this->convertString($birthDate);
         $birthDate = explode("/", $birthDate);
-        //get age from date or birthdate
+//get age from date or birthdate
         $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md") ? ((date("Y") - $birthDate[2]) - 1) : (date("Y") - $birthDate[2]));
         return ($age);
     }
 
-    private function populateCard() {
+    private function populateCard($btns = true) {
         $imgattrs = array(
             "class" => "d-block w-100 card-picture",
             "alt" => "./imgs/avatar.png",
@@ -106,7 +106,7 @@ class User {
         $this->_card->set_cardText($this->_job);
         $this->_card->set_Title($this->_fname . " " . $this->_lname . ", " . $this->_age);
         $this->_card->set_bioText($this->_bio);
-        $this->_card->assemble();
+        $this->_card->assemble($btns);
     }
 
     public function __toString() {
@@ -221,6 +221,21 @@ class User {
             $this->_card = new UserCard($this->_username);
             echo $this->__toString();
         }
+    }
+
+    public function display_CardOnly($reset = false) {
+        $ret_string ="";
+        if ($reset == false) {
+            $this->populateCard(false);
+            $ret_string = "";
+            $ret_string .= $this->_card;
+        } else {
+            $this->_card = new UserCard($this->_username);
+            $this->populateCard(false);
+            $ret_string = "";
+            $ret_string .= $this->_card;
+        }
+        return $ret_string;
     }
 
     public function get_firstName() {

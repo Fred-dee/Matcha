@@ -2,11 +2,12 @@
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/Matcha/init.php';
 if (!isset($_SESSION))
+{
     session_start();
-
+}
 if ($_SESSION["login"] != "guest") {
     //if (isset($_POST["data"]) && $_POST["data"] == true) {
-        if (!isset($_SESSION["data_start"]) || (isset($_POST["reset"]) && $_POST["reset"] == true) || (isset($_POST["data"]) && $_POST["data"] == true)) {
+        if (!isset($_SESSION["data_start"]) || (isset($_POST["reset"]) && $_POST["reset"] == true)) {
             $_SESSION["data_start"] = true;
             $_SESSION["data_offset"] = 0;
         }
@@ -19,7 +20,8 @@ if ($_SESSION["login"] != "guest") {
             if (($row = $stmt->fetch(PDO::FETCH_ASSOC))) {
                 $user = new User($row);
                 $user->display_publicCard(true);
-                $_SESSION["data_offset"] ++;
+                if ((isset($_POST["data"]) && $_POST["data"] == true))
+                    $_SESSION["data_offset"]++;
             } else {
                 unset($_SESSION["data_start"]);
                 $_SESSION["data_start"] = false;

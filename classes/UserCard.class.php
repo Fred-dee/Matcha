@@ -1,8 +1,8 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"].'/Matcha/init.php';
+
+require_once $_SERVER["DOCUMENT_ROOT"] . '/Matcha/init.php';
 if (!isset($_SESSION))
     session_start();
-
 
 class UserCard extends Element {
 
@@ -70,17 +70,17 @@ class UserCard extends Element {
         ));
     }
 
-    public function __destruct()
-    {
-     /*   unset($this->_body);
-        unset($this->_body_secondary);
-        unset($this->_image_carousel);
-        unset($this->_images);
-        unset($this->_card_title);
-        unset($this->_card_text);
-        parent::__destruct();*/
+    public function __destruct() {
+        /*   unset($this->_body);
+          unset($this->_body_secondary);
+          unset($this->_image_carousel);
+          unset($this->_images);
+          unset($this->_card_title);
+          unset($this->_card_text);
+          parent::__destruct(); */
     }
-    public function assemble() {
+
+    public function assemble($add_buttons = true) {
         $img_count = 0;
         $this->add_child($this->_image_carousel);
         $this->add_child($this->_body_secondary);
@@ -101,13 +101,14 @@ class UserCard extends Element {
             $this->querySelector(".carousel-inner")->add_child($over);
             $img_count++;
         }
-
-        $this->_body->add_child(new Element("div", false, array("class" => "d-flex justify-content-center", "id" => "btn_div")));
-        $tmp = $this->_body->querySelector("#btn_div");
-        $tmp->add_child(new Element("div", false, array("class" => "col")));
-        $tmp->add_child(new Element("div", false, array("class" => "col")));
-        $tmp->first_child()->add_child(new Element("button", false, array("class" => "btn purple-gradient btn-like")));
-        $tmp->child_at(1)->add_child(new Element("button", false, array("class" => "btn blue-gradient btn-reject")));
+        if ($add_buttons == true) {
+            $this->_body->add_child(new Element("div", false, array("class" => "d-flex justify-content-center", "id" => "btn_div")));
+            $tmp = $this->_body->querySelector("#btn_div");
+            $tmp->add_child(new Element("div", false, array("class" => "col")));
+            $tmp->add_child(new Element("div", false, array("class" => "col")));
+            $tmp->first_child()->add_child(new Element("button", false, array("class" => "btn purple-gradient btn-like")));
+            $tmp->child_at(1)->add_child(new Element("button", false, array("class" => "btn blue-gradient btn-reject")));
+        }
         $this->add_child($this->_body);
     }
 

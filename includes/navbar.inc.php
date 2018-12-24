@@ -98,7 +98,7 @@ if (!isset($_SESSION))
                     </div>
 
 
-                    <input type="submit" id ="p_submit" name="p_submit" class="form-control btn btn-elegant" />
+                    <!--<input type="submit" id ="p_submit" name="p_submit" class="form-control btn btn-elegant" /> -->
 
 
                 </form>
