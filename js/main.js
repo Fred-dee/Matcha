@@ -47,7 +47,7 @@ $(document).ready(function () {
             type: 'POST',
             success: function (data)
             {
-                console.log(data);
+                //console.log(data);
                 if (data.status != "success")
                     $.genAlert(data, false);
                 console.log(data.status + " " + data.message);
@@ -74,7 +74,7 @@ $(document).ready(function () {
             type: 'POST',
             success: function (data)
             {
-                console.log("I successedddddd");
+                //console.log("I successedddddd");
                 console.log(data);
             },
             error: function (data)

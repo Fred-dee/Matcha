@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_SESSION["user_obj"]) && isset($_FILES)) {
 
             $imageFileType = strtolower(pathinfo(basename($_FILES["image"]["name"]), PATHINFO_EXTENSION));
-            if ($_FILES["image"]["size"] > 800000) {
+            if ($_FILES["image"]["size"] > 10000) {
                 $array_response["status"] = "failure";
                 $array_response["message"] = "File too large";
                 echo json_encode($array_response);
