@@ -1,32 +1,12 @@
 {
-	"Tester:Fred-Dee":
-	[
-		"fred","hello",
-		"tester"=>"hi
-	]
-	chat1: [
-		users: ["Tester, Fred-Dee"],
-		chat: [
-		"fred" => "hello",
-		"tester" => "hi",
-		]
-	
-	]
-	chat2: [
-		users: ["Tester, Fred-Dee"],
-		chat: [
-		"fred" => "hello",
-		"tester" => "hi",
-		]
-	
-	]
-	
-
-	
-}
-
 "Tester:Fred-Dee":
 [
-"Fred-Dee" : ["hello", "01:02:2019:12:36:00:00", "read"],
-"Tester" : ["hi", "01:02:2019:12:37:00:00", "read"]
+"Fred-Dee" , ["hello", "01:02:2019:12:36:00:00", "read"],
+"Tester" , ["hi", "01:02:2019:12:37:00:00", "read"]
+],
+"Tester:Killer":
+[
+"Fred-Dee" , ["hello", "01:02:2019:12:36:00:00", "read"],
+"Tester" , ["hi", "01:02:2019:12:37:00:00", "read"]
 ]
+}
