@@ -116,13 +116,13 @@ $(document).ready(function () {
                     success: function (data)
                     {
                         //console.log(data);
-                        if (data.status != "success")
+                       if (data.status != "success")
                             $.genAlert(data, false);
                         else
                         {
                             //change the image src to the src given back in the data
                         }
-                        console.log(data.status + " " + data.message);
+                        console.log(data.status + " " + data.message + " " + data.position);
                         //window.alert("well done: "+ JSON.parse(data));
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown)

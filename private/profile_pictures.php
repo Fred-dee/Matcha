@@ -1,8 +1,13 @@
 <?php
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/Matcha/init.php';
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 if (!isset($_SESSION))
-    session_start();
+   session_start();
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //var_dump($_POST);
     //print_r($_FILES);
@@ -24,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             }
             $img_src = base64_encode(file_get_contents($_FILES["image"]["tmp_name"]));
+			
             if (!$_SESSION["user_obj"]->insert_image($imageFileType, $img_src, (int) $_POST["position"])) {
                 $array_response["status"] = "failure";
                 $array_response["message"] = "File type not supported";
@@ -34,9 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $array_response["message"] = "Image succesfully uploaded";
                 $array_response["img_Src"] = $img_src;
                 $array_response["filetype"] = $imageFileType;
+				$array_response["position"] = $_POST["position"];
                 echo json_encode($array_response);
                 exit();
             }
+			echo json_encode($array_response);
         }
     }
 }

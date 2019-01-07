@@ -28,9 +28,10 @@ if (!isset($_SESSION["login"]))
             include_once './includes/signuplogin.inc.php';
         ?>
         <div class="container-fluid page" id="main" >
-
+			
             <div class="card-wrapper align-middle">
                 <?php
+				//echo $_SERVER["DOCUMENT_ROOT"];
                 include './private/loaddata.php';
                 ?>
             </div>

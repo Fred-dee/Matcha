@@ -1,5 +1,8 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/Matcha/init.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 if (!isset($_SESSION))
     session_start();
 ?>
@@ -40,12 +43,12 @@ if (!isset($_SESSION))
         </ul>
         <div class="tab-content" id="profile_tab_content">
             <div class="tab-pane fade show active" id="edit_profile" role="tabpanel" aria-labelledby="edit-tab">
-                <?php
+               <?php
                 if (isset($_SESSION["user_obj"])) {
+					
                     $_SESSION["user_obj"]->display_pictures();
                 }
                 ?>
-
                 <form action="#" method="POST" class="text-center" id="user_info_form">
                     <div class="form-row">
                         <div class="col">
@@ -95,12 +98,7 @@ if (!isset($_SESSION))
                                 ?></textarea>
                             <label for="p_bio">Biography:</label>
                         </div>
-                    </div>
-
-
-                    <!--<input type="submit" id ="p_submit" name="p_submit" class="form-control btn btn-elegant" /> -->
-
-
+					</div>
                 </form>
             </div>
             <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
