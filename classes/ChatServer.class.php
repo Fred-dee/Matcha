@@ -62,7 +62,8 @@ class ChatServer
 	
 	public static function init()
 	{
-		self::$_source = json_decode(file_get_contents("./private/chats.txt"), true);
+		$path  = $_SERVER["DOCUMENT_ROOT"]."/Matcha/private/chats.txt";
+		self::$_source = json_decode(file_get_contents($path, true));
 	}
 	
 }

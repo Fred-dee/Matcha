@@ -42,7 +42,9 @@ class ChatItem extends Element
 								));
 			$this->add_child($img);
 			$this->add_child(new Element("span", false, array("data-toggle" => "chat-content",
-			 "data-username" => $username)));
+			 "data-username" => $username,
+			 "class" =>  "message-tag"
+			 )));
 			$this->child_at(1)->add_text($username);
 		}
 		catch(\PDOException $e)

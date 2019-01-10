@@ -49,6 +49,7 @@ if (!isset($_SESSION["login"]))
    						<?php
 							//$source = ChatServer::getConversations();
 							$chat = ChatServer::getConversation($source[0]);
+							//var_dump($chat);
 							$msg =  new Message("You", $chat[1]);
 							echo $msg;
 							//var_dump( $chat);
