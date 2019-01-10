@@ -30,6 +30,7 @@ $(document).ready(function () {
     });
     $("span[data-toggle='chat-content']").on("click", function(){
         $(".profile-browse").hide();
+		$(".profile-browse").html("");
         $(".chat-content").show();
     })
 });

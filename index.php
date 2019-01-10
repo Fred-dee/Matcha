@@ -33,16 +33,21 @@ if (!isset($_SESSION["login"]))
         <div class="container-fluid page" id="main2" style="display:none">
             <div class="row">
                 <div class="col matches">
-                    <div class="match">
-                        <img class="avatar " src="./imgs/avatar.png" alt="" data-username="Tester"/>
-                        <span data-toggle="chat-content">Tester</span>
-                    </div>
+					<?php
+						$source = ChatServer::getConversations();
+						
+						foreach($source as $value)
+						{
+							echo new ChatItem($value);
+						}
+						//echo new ChatItem($source[0]);
+					?>
                 </div>
                 <div class="col chat-section">
 
                     <div class="chat-content">
    						<?php
-							$source = ChatServer::getConversations();
+							//$source = ChatServer::getConversations();
 							$chat = ChatServer::getConversation($source[0]);
 							$msg =  new Message("You", $chat[1]);
 							echo $msg;
@@ -51,7 +56,7 @@ if (!isset($_SESSION["login"]))
 						//	echo $chat[1][1];
 							//echo $chat[1][2];
 						?>
-						<div class="message alert-success">
+						<!--<div class="message alert-success">
 							<span class="message-sender">
 								You:
 							</span>
@@ -64,7 +69,13 @@ if (!isset($_SESSION["login"]))
 							<span class="message-status">
 								<i class="fas fa-check"></i>
 							</span>
-						</div>
+						</div>-->
+						<form id="message_send" action="" method ="POST">
+							<div class="md-form">
+								<input type="text" id="message_tosend" class ="form-control" name="message_tosend" />
+								<label for="message_tosend" >Type Message Here</label>
+							</div>
+						</form>
                     </div>
                     <div class="card-wrapper align-middle profile-browse">
                     </div>
