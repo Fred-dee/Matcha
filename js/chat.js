@@ -17,6 +17,7 @@ $(document).ready(function () {
             success: function (data) {
                 $(".chat-content").hide();
 				$(".chat-content").html("");
+				$(".profile-browse").html("");
                 $(".profile-browse").show();
                 $(".profile-browse").html(data);
                 
@@ -35,14 +36,24 @@ $(document).ready(function () {
         fd.append("username", $req);
 		fd.append("get_chat", true);
         $.ajax({
+			dataType:"json",
             data: fd,
             url: "./private/chatinterface.php",
             processData: false,
             contentType: false,
             type: 'POST',
             success: function (data) {
-					console.log(data);
-                
+				
+				$(".profile-browse").hide();
+				$(".profile-browse").html("");
+				$(".chat-content").remove(".message");
+				$(".chat-content").show();
+				for (var i = 0; i < data.length; i++)
+				{
+					$(".chat-content").prepend(data[i]);		
+				}
+				//$(".chat-content").html(data);
+				console.log(data);    
             },
             error: function (XMLHttpRequest, textStatus, errorThrown)
             {

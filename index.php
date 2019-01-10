@@ -47,30 +47,9 @@ if (!isset($_SESSION["login"]))
 
                     <div class="chat-content">
    						<?php
-							//$source = ChatServer::getConversations();
-							$chat = ChatServer::getConversation($source[0]);
-							//var_dump($chat);
-							$msg =  new Message("You", $chat[1]);
-							echo $msg;
-							//var_dump( $chat);
-						//	echo $chat[1][0];
-						//	echo $chat[1][1];
-							//echo $chat[1][2];
+							//first chat here perhaps?
 						?>
-						<!--<div class="message alert-success">
-							<span class="message-sender">
-								You:
-							</span>
-							<span class="message-content">
-								Hey there Tester
-							</span>
-							<span class="message-time">
-								10:15
-							</span>
-							<span class="message-status">
-								<i class="fas fa-check"></i>
-							</span>
-						</div>-->
+
 						<form id="message_send" action="" method ="POST">
 							<div class="md-form">
 								<input type="text" id="message_tosend" class ="form-control" name="message_tosend" />
