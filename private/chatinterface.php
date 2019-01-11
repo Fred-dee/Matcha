@@ -1,6 +1,8 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/Matcha/init.php';
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 if (!isset($_SESSION))
     session_start();
 
@@ -24,12 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["login"] != "guest")
 			array_push($chat_items, $tmp->__toString());
 		}
 		echo json_encode($chat_items);
-		exit();
+		//exit();
 		//echo count($source);
 		
 	}
 	if (isset($_POST["send_message"]) && $_POST["send_message"] == true)
 	{
+		echo " I am here";
 		$arr_response = array(
 			"status" => "First base",
 			"message" => "First Base"
@@ -47,10 +50,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["login"] != "guest")
 			$arr_response["message"] = "Was unable to send the message";
 		}
 		echo json_encode($arr_response);
-		exit();
+		//exit();
+		//echo "I entered";
 	}
 
 } 
-//echo "done";
 
 ?>

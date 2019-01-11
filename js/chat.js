@@ -74,8 +74,9 @@ $(document).ready(function () {
 		
 		var fd = new FormData(document.getElementById("message_send"));
 		fd.append("send_message", true);
-		console.log($(".match .active").first().data("username"));
-		fd.append("username", $(".match .active").first().data("username"));
+		
+		var username = $(".match.active").first()[0].firstChild.getAttribute("data-username");
+		fd.append("username", username);
 		$.ajax({
 			dataType: "",
 			url: "./private/chatinterface.php",
