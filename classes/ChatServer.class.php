@@ -5,6 +5,7 @@ if (!isset($_SESSION))
 class ChatServer
 {
 	public static $_source = null;
+	private static $_path = $_SERVER["DOCUMENT_ROOT"]."/Matcha/private/chats.txt";
 	
 	private static function isPair($value1, $value2, $string)
 	{
@@ -26,7 +27,6 @@ class ChatServer
 		if (self::$_source == null)
 			self::init();
 		$keys = array_keys(self::$_source);
-		$convo;
 		foreach ($keys as $value)
 		{
 			if (self::isPair($_SESSION["login"], $username, $value))
@@ -62,8 +62,39 @@ class ChatServer
 	
 	public static function init()
 	{
-		$path  = $_SERVER["DOCUMENT_ROOT"]."/Matcha/private/chats.txt";
-		self::$_source = json_decode(file_get_contents($path),  true);
+		
+		self::$_source = json_decode(file_get_contents(self::$_path),  true);
+	}
+	
+	public static function sendMessage($username, $message)
+	{
+		if (self::$_source == null)
+			self::init();
+		$keys = array_keys(self::$_source);
+		$found = false;
+		$curr = array($_SESSION["login"], array($message, time(), "unread"));
+		foreach ($keys as $value)
+		{
+			if (self::isPair($_SESSION["login"], $username, $value))
+			{
+	
+				array_push(self::$_source[$value], $curr);
+				$found  = true;
+				break;
+			}
+		}
+		if ($found ==  false)
+		{
+			// make a new conversation
+			$new_key = $_SESSION["login"].":".$username;
+			array_push(self::$_source, array($new_key => $curr));
+		}
+		// for now overwrite the file
+		
+		file_put_contents(self::$_path, json_encode(self::$_source));
+		return true;
+		
+		
 	}
 	
 }

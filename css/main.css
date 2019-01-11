@@ -54,9 +54,38 @@
 .message-tag:hover
 {
 	cursor: pointer;
+	color: aqua;
+
 }
 
 .message-sender::after
 {
 	content: ": ";
+}
+
+.message
+{
+	height: 50px;
+	display: inline-block;
+	position: relative;
+	padding: 5px;
+	margin: 2px;
+	border-radius: 5%;
+}
+
+.message-time
+{
+	right: 0px;
+	bottom: 0px;
+}
+
+.message-status
+{
+	left: 0px;
+	
+}
+
+.message-content
+{
+	
 }

@@ -8,6 +8,8 @@ $(document).ready(function () {
         var $req = $(this).data("username");
         var fd = new FormData();
         fd.append("user", $req);
+		$(".avatar").parent().removeClass("active");
+		$(this).parent().addClass("active");
         $.ajax({
             data: fd,
             url: "./private/showuser.php",
@@ -33,6 +35,8 @@ $(document).ready(function () {
     $("span[data-toggle='chat-content']").on("click", function(){
         var $req = $(this).data("username");
         var fd = new FormData();
+		$("span[data-toggle='chat-content']").parent().removeClass("active");
+		$(this).parent().addClass("active");
         fd.append("username", $req);
 		fd.append("get_chat", true);
         $.ajax({
@@ -52,7 +56,6 @@ $(document).ready(function () {
 				{
 					$(".chat-content").prepend(data[i]);		
 				}
-				//$(".chat-content").html(data);
 				console.log(data);    
             },
             error: function (XMLHttpRequest, textStatus, errorThrown)
@@ -64,16 +67,36 @@ $(document).ready(function () {
         });
        
     });
+	
+	$("#message_send").on("submit", function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		
+		var fd = new FormData(document.getElementById("message_send"));
+		fd.append("send_message", true);
+		$.ajax({
+			dataType: "",
+			url: "./private/chatinterface.php",
+			processData: false,
+			contentType: false,
+			type: 'POST',
+            success: function (data)
+            {
+                //console.log(data);
+                if (data.status != "success")
+                    $.genAlert(data, false);
+                console.log(data.status + " " + data.message);
+                //window.alert("well done: "+ JSON.parse(data));
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown)
+            {
+
+                alert("Status: " + textStatus);
+                alert("Error: " + errorThrown);
+            }
+		});
+	});
 });
-/*
-			sucess: function(data)
-			{
-				$(".profile-browse").hide();
-				$(".profile-browse").html("");
-				$(".chat-content").show();
-				$(".chat-content").html(data);
-				console.log(data);
-			},
-*/
+
 
 
