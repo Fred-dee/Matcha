@@ -74,6 +74,8 @@ $(document).ready(function () {
 		
 		var fd = new FormData(document.getElementById("message_send"));
 		fd.append("send_message", true);
+		console.log($(".match .active").first().data("username"));
+		fd.append("username", $(".match .active").first().data("username"));
 		$.ajax({
 			dataType: "",
 			url: "./private/chatinterface.php",
@@ -82,11 +84,11 @@ $(document).ready(function () {
 			type: 'POST',
             success: function (data)
             {
-                //console.log(data);
-                if (data.status != "success")
-                    $.genAlert(data, false);
-                console.log(data.status + " " + data.message);
-                //window.alert("well done: "+ JSON.parse(data));
+				console.log(data);
+                //if (data.status != "success")
+                 //   $.genAlert(data, false);
+                //console.log(data.status + " " + data.message);
+
             },
             error: function (XMLHttpRequest, textStatus, errorThrown)
             {

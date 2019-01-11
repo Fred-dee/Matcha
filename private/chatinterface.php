@@ -28,11 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["login"] != "guest")
 		//echo count($source);
 		
 	}
-	if (isset($_POST["send_message"] && $_POST["send_message"] == true))
+	if (isset($_POST["send_message"]) && $_POST["send_message"] == true)
 	{
 		$arr_response = array(
-			"status" => "",
-			"message" => ""
+			"status" => "First base",
+			"message" => "First Base"
 		);
 		$user = htmlspecialchars($_POST["username"]);
 		$message = htmlspecialchars($_POST["message_tosend"]);

@@ -5,7 +5,7 @@ if (!isset($_SESSION))
 class ChatServer
 {
 	public static $_source = null;
-	private static $_path = $_SERVER["DOCUMENT_ROOT"]."/Matcha/private/chats.txt";
+	private static $_path = "";
 	
 	private static function isPair($value1, $value2, $string)
 	{
@@ -62,7 +62,7 @@ class ChatServer
 	
 	public static function init()
 	{
-		
+		self::$_path = $_SERVER["DOCUMENT_ROOT"]."/Matcha/private/chats.txt";
 		self::$_source = json_decode(file_get_contents(self::$_path),  true);
 	}
 	
