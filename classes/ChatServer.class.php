@@ -91,8 +91,8 @@ class ChatServer
 		}
 		// for now overwrite the file
 		
-		file_put_contents(self::$_path, json_encode(self::$_source));
-		return true;		
+		return (file_put_contents(self::$_path, json_encode(self::$_source)));
+		//return true;		
 	}
 	
 }

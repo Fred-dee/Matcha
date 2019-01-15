@@ -22,7 +22,7 @@ if (!isset($_SESSION["login"]))
             include_once './includes/signuplogin.inc.php';
         ?>
         <div class="container-fluid page" id="main" >
-			
+
             <div class="card-wrapper align-middle">
                 <?php
                 include './private/loaddata.php';
@@ -33,28 +33,27 @@ if (!isset($_SESSION["login"]))
         <div class="container-fluid page" id="main2" style="display:none">
             <div class="row">
                 <div class="col matches">
-					<?php
-						$source = ChatServer::getConversations();
-						
-						foreach($source as $value)
-						{
-							echo new ChatItem($value);
-						}
-					?>
+                    <?php
+                    $source = ChatServer::getConversations();
+
+                    foreach ($source as $value) {
+                        echo new ChatItem($value);
+                    }
+                    ?>
                 </div>
                 <div class="col chat-section">
 
                     <div class="chat-content">
-   						<?php
-							//first chat here perhaps?
-						?>
-						<form id="message_send" action="" method ="POST">
-							<div class="md-form">
-								<input type="text" id="message_tosend" class ="form-control" name="message_tosend" required/>
-								<label for="message_tosend" >Type Message Here</label>
-							</div>
-							<input type="submit" id="message_submit" class="form-control" />
-						</form>
+                        <?php
+                        //first chat here perhaps?
+                        ?>
+                        <form id="message_send" action="./private/chatinterface.php" method ="POST">
+                            <div class="md-form">
+                                <input type="text" id="message_tosend" class ="form-control" name="message_tosend" required/>
+                                <label for="message_tosend" >Type Message Here</label>
+                            </div>
+                            <input type="submit" id="message_submit" class="form-control" />
+                        </form>
                     </div>
                     <div class="card-wrapper align-middle profile-browse">
                     </div>

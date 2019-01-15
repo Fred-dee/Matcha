@@ -1,17 +1,1 @@
-{
-"Tester:Fred-Dee":
-[
-"Fred-Dee" , ["Hello Tester!", "01:02:2019:12:36:00:00", "read"],
-"Tester" , ["hi Fred-Dee, Tester Here", "01:02:2019:12:37:00:00", "read"]
-],
-"Tester:Killer":
-[
-"Fred-Dee" , ["Hello Killer", "01:02:2019:12:36:00:00", "read"],
-"Killer" , ["Hey There Fred-Dee, Killer Here", "01:02:2019:12:37:00:00", "read"]
-],
-"Fred-Dee:Jake":
-[
-	"Fred-Dee", ["Dude it was epic", "01:02:2019:13:37:00:00", "unread"]
-]
-
-}
+{"Tester:Fred-Dee":["Fred-Dee",["Hello Tester!","01:02:2019:12:36:00:00","read"],"Tester",["hi Fred-Dee, Tester Here","01:02:2019:12:37:00:00","read"],["Fred-Dee",["Can I do it",1547482631,"unread"]],["Fred-Dee",["Lets see if this fixes it",1547482836,"unread"]]],"Tester:Killer":["Fred-Dee",["Hello Killer","01:02:2019:12:36:00:00","read"],"Killer",["Hey There Fred-Dee, Killer Here","01:02:2019:12:37:00:00","read"]],"Fred-Dee:Jake":["Fred-Dee",["Dude it was epic","01:02:2019:13:37:00:00","unread"]]}

@@ -6,7 +6,7 @@ class DB {
     private static $host = 'localhost';
     private static $db = 'db_matcha';
     private static $user = 'root';
-    private static $pass = 'password'; //password
+    private static $pass = ''; //password
     private static $charset = 'utf8mb4';
     public static $pdo = null;
 
