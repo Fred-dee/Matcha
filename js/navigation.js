@@ -23,8 +23,7 @@ $(document).ready(function () {
     $(".sidenav-open").on("click", function ()
     {
         $("#mySidenav").width(350);
-        $("#main").css("marginLeft", "350px");
-        $("#main2").css("marginLeft", "350px");
+        $(".page").css("marginLeft", "350px");
         $("#mySidenav").data("open", true).trigger("openstatechange");
         //$("#main").style.overflowX = "none";
 
@@ -44,8 +43,7 @@ $(document).ready(function () {
 
     $(".sidenav-close").on("click", function () {
         $("#mySidenav").width("0");
-        $("#main").css("marginLeft", "0px");
-        $("#main2").css("marginLeft", "0px");
+		$(".page").css("marginLeft", "0px");
         $("#mySidenav").data("open", false).trigger("openstatechange");
 
     });
@@ -53,16 +51,21 @@ $(document).ready(function () {
     $.showPage = function ($name)
     {
         $($name).slideDown("slow");
+		//$($name).data("open", true);
     };
 
     $(".page-toggle").on("click", function (e) {
         e.preventDefault();
         var $tohide = "";
-        if ($(this).attr("href") == "#main")
-            $tohide = "#main2";
-        else
-            $tohide = "#main";
-        $($tohide).slideUp("slow", $.showPage($(this).attr("href")));
+		$tohide = "#" + $(".page[data-open='true']").attr("id");
+		
+		if ($tohide != $(this).attr("href"))
+		{
+			
+			$($tohide).slideUp("slow", $.showPage($(this).attr("href")));
+			$($tohide).attr("data-open", false);
+			$($(this).attr("href")).attr("data-open", true);
+		}
 
     });
 

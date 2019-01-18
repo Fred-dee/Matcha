@@ -21,7 +21,7 @@ if (!isset($_SESSION["login"]))
         if ($_SESSION["login"] == "guest")
             include_once './includes/signuplogin.inc.php';
         ?>
-        <div class="container-fluid page" id="main" >
+        <div class="container-fluid page" id="main" data-open="true">
 			
             <div class="card-wrapper align-middle">
                 <?php
@@ -30,7 +30,7 @@ if (!isset($_SESSION["login"]))
             </div>
             <?php require './includes/footer.inc.php' ?>
         </div>
-        <div class="container-fluid page" id="main2" style="display:none">
+        <div class="container-fluid page" id="main2" style="display:none" data-open="false">
             <div class="row">
                 <div class="col matches">
 					<?php
@@ -62,6 +62,8 @@ if (!isset($_SESSION["login"]))
             </div>
             <?php require './includes/footer.inc.php' ?>
         </div>
+		<div class="container-fluid page" id="main3" style="display:none" data-open="false">
+		</div>
 
     </body>
 </html>
