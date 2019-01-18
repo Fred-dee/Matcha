@@ -87,6 +87,9 @@ $(document).ready(function () {
             success: function (data)
             {
                 console.log(data);
+                $("#message_send").trigger("reset");
+               
+                
                 //if (data.status != "success")
                 //   $.genAlert(data, false);
                 //console.log(data.status + " " + data.message);
@@ -101,6 +104,8 @@ $(document).ready(function () {
         });
     });
 });
-
+/*
+ * {"Tester:Fred-Dee":["Fred-Dee",["Hello Tester!","01:02:2019:12:36:00:00","read"],"Tester",["hi Fred-Dee, Tester Here","01:02:2019:12:37:00:00","read"],["Fred-Dee",["Can I do it",1547482631,"unread"]],["Fred-Dee",["Lets see if this fixes it",1547482836,"unread"]]],"Tester:Killer":["Fred-Dee",["Hello Killer","01:02:2019:12:36:00:00","read"],"Killer",["Hey There Fred-Dee, Killer Here","01:02:2019:12:37:00:00","read"]],"Fred-Dee:Jake":["Fred-Dee",["Dude it was epic","01:02:2019:13:37:00:00","unread"],{"Fred-Dee":["Please be in the right format",1547735431,"unread"]},{"Fred-Dee":["Please be in the right format",1547735433,"unread"]},{"Fred-Dee":["Another one",1547735574,"unread"]},{"Fred-Dee":["Another one",1547735580,"unread"]},{"Fred-Dee":["Another one",1547735583,"unread"]},{"Fred-Dee":["Here is my message",1547735687,"unread"]},"Fred-Dee",["This one is lit",1547735850,"unread"],"Fred-Dee",["Will you work",1547736308,"unread"],"Fred-Dee",["Another one",1547736388,"unread"]]}
+ */
 
 

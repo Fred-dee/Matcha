@@ -15,20 +15,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["login"] != "guest") {
         $chat_items = array();
         $source = ChatServer::getConversation($user);
         $sender = "";
-        for ($i = 0; $i < count($source); $i = $i + 2) {
-            if ($source[$i] == $_SESSION["login"])
-                $sender = "You";
-            else
-                $sender = $source[$i];
-            $tmp = new Message($sender, $source[$i + 1]);
-            array_push($chat_items, $tmp->__toString());
+        if (!empty($source)) {
+            for ($i = 0; $i < count($source); $i = $i + 2) {
+                if ($source[$i] == $_SESSION["login"])
+                    $sender = "You";
+                else
+                    $sender = $source[$i];
+                $tmp = new Message($sender, $source[$i + 1]);
+                array_push($chat_items, $tmp->__toString());
+            }
+            echo json_encode($chat_items);
+            exit();
         }
-        echo json_encode($chat_items);
         //exit();
         //echo count($source);
     }
     if (isset($_POST["send_message"]) && $_POST["send_message"] == true) {
-       
+
         $arr_response = array(
             "status" => "",
             "message" => ""
@@ -38,6 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["login"] != "guest") {
         if (ChatServer::sendMessage($user, $message)) {
             $arr_response["status"] = "success";
             $arr_response["message"] = "Succesfully sent message";
+            $msg = new Message("You", time(), "unread");
+            $arr_response["object"] = $msg->__toString();
         } else {
             $arr_response["status"] = "failure";
             $arr_response["message"] = "Was unable to send the message";
@@ -46,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["login"] != "guest") {
         exit();
         //echo "I entered";
     }
-    
-  // echo $_POST["send_message"];
+
+    // echo $_POST["send_message"];
 }
 ?>

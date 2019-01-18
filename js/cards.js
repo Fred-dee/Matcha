@@ -27,7 +27,7 @@ $.likePerson = function ()
             1000,
             function () {
                 var fd = new FormData();
-                fd.append("action", "likeed");
+                fd.append("action", "liked");
                 fd.append("user", $(this).data("for"));
                 fd.append("data", true);
                 $(this).toggle("fade");

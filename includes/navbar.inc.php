@@ -17,6 +17,9 @@ if (!isset($_SESSION))
         <div class="nav-center">
             <a class="navbar-brand page-toggle" href="#main"><i class="fas fa-user"></i></a>
             <a class="navbar-brand page-toggle" href="#main2"><i class="fas fa-comments"></i></a>
+			<a class="navbar-brand page-toggle" href="#main3">
+				<i class="fa fa-fire" aria-hidden="true"></i>
+			</a>
         </div>
         <a class="navbar-brand" href="./private/logout.php" style="position: absolute; right: 0px;">Logout</a>
         <?php
