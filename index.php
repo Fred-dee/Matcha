@@ -21,13 +21,10 @@ if (!isset($_SESSION["login"]))
         if ($_SESSION["login"] == "guest")
             include_once './includes/signuplogin.inc.php';
         ?>
-<<<<<<< HEAD
-        <div class="container-fluid page" id="main" >
 
-=======
         <div class="container-fluid page" id="main" data-open="true">
-			
->>>>>>> 837afa4b3903a017448d3650b60bd6ad921be3e1
+
+
             <div class="card-wrapper align-middle">
                 <?php
                 include './private/loaddata.php';
@@ -66,8 +63,33 @@ if (!isset($_SESSION["login"]))
             </div>
             <?php require './includes/footer.inc.php' ?>
         </div>
-		<div class="container-fluid page" id="main3" style="display:none" data-open="false">
-		</div>
+        <div class="container-fluid page" id="main3" style="display:none" data-open="false">
+            <div class="row">
+                <div class="col new-match-col">
+                    <?php
+                    $pdo = DB::getConnection();
+                    $curr_user = $_SESSION["login"];
+                    $stmt = $pdo->prepare("SET @curr_user = :curr_user");
+                    
+                    $stmt->bindValue(":curr_user", "%$curr_user%", PDO::PARAM_STR);
+                    $stmt->execute();
+                    $stmt = $pdo->prepare(
+                            "Select * FROM users "
+                            . "JOIN  events ON events.action='liked' AND (events.actioned_by='@curr_user' OR events.actioned_towards='@curr_user')"
+                            . "WHERE (users.username != '@curr_user' )"
+                    );
+                    
+                    //$stmt->bindparam(":unameBy", $user, PDO::PARAM_STR);
+                    //$stmt->bindparam(":unameTo", $user, PDO::PARAM_STR);
+                    //$stmt->bindparam(":unameExclude", $user, PDO::PARAM_STR);
+                    $stmt->execute();
+                    while (($row = $stmt->fetch(PDO::FETCH_ASSOC))) {
+                        echo $row["username"];
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
 
     </body>
 </html>
