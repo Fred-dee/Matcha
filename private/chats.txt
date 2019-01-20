@@ -1,1 +1,1 @@
-["\"Fred-Dee:Tester\":[\"Fred-Dee\",[\"You can do it\",\"1547741047\",\"unread\"]]"]
+[{"Fred-Dee:Tester":["Fred-Dee",["Heres the first message",1548005841,"unread"]]}]

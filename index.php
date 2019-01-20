@@ -36,11 +36,7 @@ if (!isset($_SESSION["login"]))
             <div class="row">
                 <div class="col matches">
                     <?php
-                    $source = ChatServer::getConversations();
-
-                    foreach ($source as $value) {
-                        echo new ChatItem($value);
-                    }
+                        require './includes/matched.inc.php';
                     ?>
                 </div>
                 <div class="col chat-section">
@@ -67,25 +63,6 @@ if (!isset($_SESSION["login"]))
             <div class="row">
                 <div class="col new-match-col">
                     <?php
-                    $pdo = DB::getConnection();
-                    $curr_user = $_SESSION["login"];
-                    $stmt = $pdo->prepare("SET @curr_user = :curr_user");
-                    
-                    $stmt->bindValue(":curr_user", "%$curr_user%", PDO::PARAM_STR);
-                    $stmt->execute();
-                    $stmt = $pdo->prepare(
-                            "Select * FROM users "
-                            . "JOIN  events ON events.action='liked' AND (events.actioned_by='@curr_user' OR events.actioned_towards='@curr_user')"
-                            . "WHERE (users.username != '@curr_user' )"
-                    );
-                    
-                    //$stmt->bindparam(":unameBy", $user, PDO::PARAM_STR);
-                    //$stmt->bindparam(":unameTo", $user, PDO::PARAM_STR);
-                    //$stmt->bindparam(":unameExclude", $user, PDO::PARAM_STR);
-                    $stmt->execute();
-                    while (($row = $stmt->fetch(PDO::FETCH_ASSOC))) {
-                        echo $row["username"];
-                    }
                     ?>
                 </div>
             </div>

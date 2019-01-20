@@ -12,8 +12,13 @@ if (!isset($_SESSION))
 
 class ChatItem extends Element {
 
-    public function __construct($username) {
-        parent::__construct("div", false, array("class" => "match"));
+    public function __construct($username, $active = false) {
+        $parent_class = "";
+        if ($active == "true")
+            $parent_class = "match active";
+        else
+            $parent_class = "match";
+        parent::__construct("div", false, array("class" => $parent_class));
         $pdo = DB::getConnection();
         try {
             $stmt = $pdo->prepare(
