@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["login"] != "guest") {
         $user = htmlspecialchars($_POST["username"]);
         $chat_items = array();
         $source = ChatServer::getConversation($user);
-        $sender = "";
+        /*$sender = "";
         if (!empty($source)) {
             for ($i = 0; $i < count($source); $i = $i + 2) {
                 if ($source[$i] == $_SESSION["login"])
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["login"] != "guest") {
             }
             echo json_encode($chat_items);
             exit();
-        }
+        }*/
         //exit();
         //echo count($source);
     }
