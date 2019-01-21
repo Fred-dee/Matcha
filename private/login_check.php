@@ -149,6 +149,10 @@ if (isset($_POST["submit"])) {
                         exit();
                     }
                     //header("location: ../index");'
+					$stmt = $pdo->prepare("UPDATE users SET `session_start`=NOW(), session_end=NULL WHERE username=:uname");
+					
+					$stmt->bindParam(":uname", $username, PDO::PARAM_STR);
+					$stmt->execute();
                     echo json_encode(array(
                         "status" => "success",
                         "message" => "Logged in succesfully",
